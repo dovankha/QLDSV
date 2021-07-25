@@ -11,3 +11,17 @@ class Point_node
     Point_node();
     ~Point_node();
 };
+
+Point_node::Point_node(Point data)
+{
+    this->data = data;
+    this->next = nullptr;
+}
+
+Point_node::Point_node()
+{
+}
+
+Point_node::~Point_node()
+{
+}
