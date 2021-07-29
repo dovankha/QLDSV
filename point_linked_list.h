@@ -19,12 +19,23 @@ public:
     void remove_by_subject_id(string id);
     void replace_id(string id);
 
+    void show_data();
+
     Point_node *get_head();
     float get_point(string subject_id);
 
     Point_linked_list();
     ~Point_linked_list();
 };
+
+void Point_linked_list::show_data()
+{
+    for (Point_node *temp = head; temp != nullptr; temp = temp->next)
+    {
+        temp->data.showData();
+        cout << endl;
+    }
+}
 
 bool Point_linked_list::empty()
 {
@@ -59,7 +70,7 @@ void Point_linked_list::pop_back()
 {
     if (empty())
     {
-        throw string(" point list empty");
+        cout << "point list empty";
     }
     if (head->next == nullptr)
     {
@@ -90,7 +101,7 @@ void Point_linked_list::pop_front()
 {
     if (empty())
     {
-        throw string(" point list empty");
+        cout << " invalid position";
         return;
     }
     Point_node *temp = head;
@@ -103,7 +114,7 @@ void Point_linked_list::insert_at(int position, Point data)
 {
     if (position > size || position < 0)
     {
-        throw string("invalid position");
+        cout << " invalid position";
         return;
     }
     if (head == nullptr && position == 0)
@@ -133,7 +144,7 @@ void Point_linked_list::remove_at(int position)
 {
     if (empty())
     {
-        throw string(" point list empty");
+        cout << " point list empty";
         return;
     }
     if (position > size - 1 || position < 0)
@@ -170,7 +181,7 @@ void Point_linked_list::remove_by_id(string id)
 {
     if (empty())
     {
-        throw string(" point list empty");
+        cout << " point list empty";
         return;
     }
     if (id == head->data.get_subject_id())
@@ -189,7 +200,7 @@ void Point_linked_list::remove_by_id(string id)
     }
     if (temp == nullptr)
     {
-        throw string(" not fount id");
+        cout << " not fount id";
     }
     else
     {
@@ -215,7 +226,7 @@ void Point_linked_list::remove_by_subject_id(string id)
 {
     if (empty())
     {
-        throw string(" point list empty");
+        cout << " point list empty";
         return;
     }
     if (id == head->data.get_subject_id())
@@ -235,7 +246,7 @@ void Point_linked_list::remove_by_subject_id(string id)
 
     if (temp == nullptr)
     {
-        throw string(" not found id");
+        cout << " not found id";
     }
     else
     {

@@ -3,7 +3,7 @@
 
 class Point_node
 {
-    public:
+public:
     Point data;
     Point_node *next;
     Point_node(Point data);

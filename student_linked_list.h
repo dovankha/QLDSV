@@ -22,7 +22,9 @@ public:
     int is_contain_id(string id);
     int is_contain_id_except(string id, string except);
 
-    void sort(); // chua cai dat
+    void sort();
+    void swapp(Student &A, Student &B);
+    void show_data();
 
     Student_node *get_head() const;
     Student_node *get_node_at(int index);
@@ -31,6 +33,42 @@ public:
     Student_linked_list();
     ~Student_linked_list();
 };
+
+void Student_linked_list::show_data()
+{
+    for (Student_node *temp = head; temp != nullptr; temp = temp->next)
+    {
+        temp->data.showData();
+        cout << endl;
+    }
+}
+
+void Student_linked_list::swapp(Student &A, Student &B)
+{
+    Student C = A;
+    A = B;
+    B = C;
+}
+
+void Student_linked_list::sort()
+{
+    auto min = head;
+    for (auto i = head; i != nullptr && i->next != nullptr; i = i->next)
+    {
+        min = i;
+        for (auto j = i->next; j != nullptr; j = j->next)
+        {
+            if (j->data.get_id() < min->data.get_id())
+            {
+                min = j;
+            }
+        }
+        if (min != i)
+        {
+            swapp(i->data, min->data);
+        }
+    }
+}
 
 bool Student_linked_list::empty()
 {
@@ -73,7 +111,7 @@ void Student_linked_list::pop_back()
 {
     if (empty())
     {
-        throw string(" point list empty");
+        cout << " point list empty";
     }
     if (head->next == nullptr)
     {
@@ -95,7 +133,7 @@ void Student_linked_list::pop_front()
 {
     if (empty())
     {
-        throw string(" point list empty");
+        cout << " point list empty";
         return;
     }
     Student_node *temp = head;
@@ -108,7 +146,7 @@ void Student_linked_list::insert_at(int position, Student data)
 {
     if (position > size || position < 0)
     {
-        throw string("invalid position");
+        cout << "invalid position";
         return;
     }
     if (head == nullptr && position == 0)
@@ -140,7 +178,7 @@ void Student_linked_list::remove_at(int position)
 {
     if (empty())
     {
-        throw string(" point list empty");
+        cout << " point list empty";
         return;
     }
     if (position > size - 1 || position < 0)
@@ -177,7 +215,7 @@ void Student_linked_list::remove_by_id(string id)
 {
     if (empty())
     {
-        throw string(" point list empty");
+        cout << " point list empty";
         return;
     }
     if (id == head->data.get_id())
@@ -198,7 +236,7 @@ void Student_linked_list::remove_by_id(string id)
 
     if (temp == nullptr)
     {
-        throw string("not found id");
+        cout << "not found id";
     }
     else
     {

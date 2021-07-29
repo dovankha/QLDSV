@@ -3,6 +3,7 @@
 
 class Student
 {
+    
     string id;
     string first_name;
     string last_name;
@@ -135,10 +136,10 @@ void Student::getDataFromInput()
 
 void Student::showData()
 {
-    cout << "\nYour ID is " << this->id;
-    cout << "\nYour name is " << this->last_name << " " << this->first_name;
-    cout << "\nYour sex is " << this->sex;
-    cout << "\nYour number phone is " << this->number_phone;
+    cout << "\nYour ID: " << this->id;
+    cout << "\nYour name: " << this->last_name << " " << this->first_name;
+    cout << "\nYour sex: " << this->sex;
+    cout << "\nYour number phone: " << this->number_phone;
 }
 
 Student::Student()
