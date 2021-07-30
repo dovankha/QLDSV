@@ -7,22 +7,23 @@ using namespace std;
 class Point
 {
     string subject_id;
-    int num_of_test;
+    int test_by_number_year;
     float point;
 
 public:
-    Point(string subject_id,int num_of_test, float point);
+    Point(string subject_id,int test_by_number_year, float point);
     Point(Point *point);
     string get_subject_id() const;
     void set_subject_id(string subject_id);
     int get_num_of_test() const;
-    void set_num_of_test(int num_of_test);
+    void set_num_of_test(int test_by_number_year);
     float get_point() const;
     void set_point(float point);
     void showData();
     bool operator==(Point &other) const;
     friend ofstream &operator<<(ofstream &out, Point &other);
     friend ifstream &operator>>(ifstream &in, Point &other);
+    
 
     Point();
     ~Point();
@@ -31,14 +32,14 @@ public:
 void Point::showData()
 {
     cout << "\nID subject: " << this->subject_id;
-    cout << "\nNumber of test:" << this->num_of_test;
+    cout << "\nNumber of test:" << this->test_by_number_year;
     cout << "\nPoint: " << this->point;
 }
 
-Point::Point(string subject_id,int num_of_test, float point)
+Point::Point(string subject_id,int test_by_number_year, float point)
 {
     this->subject_id = subject_id;
-    this->num_of_test = num_of_test;
+    this->test_by_number_year = test_by_number_year;
     this->point = point;
 }
 
@@ -49,12 +50,12 @@ Point::Point(Point *point)
 
 int Point::get_num_of_test() const
 {
-    return num_of_test;
+    return test_by_number_year;
 }
 
-void Point::set_num_of_test(int num_of_test)
+void Point::set_num_of_test(int test_by_number_year)
 {
-    this->num_of_test = num_of_test;
+    this->test_by_number_year = test_by_number_year;
 }
 
 string Point::get_subject_id() const

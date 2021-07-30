@@ -32,6 +32,7 @@ public:
     void set_students_linked(string classId, Student_linked_list *student_list);
     void replace_subject_name(string name, int index);
     void replace_subject_id(string id, int index);
+    void replace_class_by_ID(string id, Class clas);
 
     int get_size() const;
     void set_size(int size);
@@ -43,6 +44,21 @@ public:
     Classes_list();
     ~Classes_list();
 };
+
+void Classes_list::replace_class_by_ID(string id, Class clas)
+{
+    int position = 0;
+    for (int i = 0; i < size; i++)
+    {
+        if (data[i]->get_id() == id)
+        {
+           break;
+        }
+    }
+
+    data[position]->set_name(clas.get_name());
+    data[position]->set_year(clas.get_year());
+}
 
 void Classes_list::delete_by_id(string classId)
 {
@@ -189,12 +205,18 @@ void Classes_list::show_data()
     cout << "\t" << left << setw(12) << "| Class ID" << left << setw(21) << "|       Name" << left << setw(10) << "|  Year  |\n";
     cout << "\t" << "+-----------+--------------------+--------+" << endl;
 
-    for (int i = 0; i < size; i++)
+    if (empty())
+        cout << "\nClass list is empty!" << endl;
+    else
     {
-        data[i]->showData();
-        cout << endl;
+        for (int i = 0; i < size; i++)
+        {
+            data[i]->showData();
+            cout << endl;
+        }
+        cout << "\t" << "+-----------+--------------------+--------+" << endl;
     }
-    cout << "\t" << "+-----------+--------------------+--------+" << endl;
+    
 }
 
 void Classes_list::set_students_linked_list(Student_linked_list *student_linked_list, int index)

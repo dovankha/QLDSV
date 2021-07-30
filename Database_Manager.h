@@ -210,8 +210,6 @@ void Database_Manager::save_classes_list(Classes_list *class_list)
     {
         save_class(*class_list->get_data()[i], file);
         string path = student_list_file_path + class_list->get_data()[i]->get_id() + ".csv";
-        // cout << "student list:" << class_list->get_data()[i]->get_student_list() << " \n";
-
         if (class_list->get_data()[i]->get_student_list() != nullptr)
         {
             save_students_linked_list(class_list->get_data()[i]->get_student_list(), path);
@@ -225,14 +223,14 @@ Classes_list *Database_Manager::read_classes_list(string file_path)
     ifstream file(class_list_file_path);
 
     if (!file.is_open())
-        return nullptr;
+        return new Classes_list();
 
     int size = 0;
     file >> size;
     string line;
     getline(file, line);
 
-    Classes_list *classes_list = new Classes_list;
+    Classes_list *classes_list = new Classes_list();
 
     for (int i = 0; i < size; i++)
     {

@@ -22,7 +22,7 @@ public:
     void set_name(string name);
     int get_year() const;
     void set_year(int year);
-    void getInfoFromInput();
+    void getInfoFromInput(bool);
     void showData();
     Student_linked_list *get_student_list() const;
     void set_student_list(Student_linked_list *student_list);
@@ -86,10 +86,12 @@ void Class::set_student_list(Student_linked_list *student_list)
     this->student_list = student_list;
 }
 
-void Class::getInfoFromInput()
+void Class::getInfoFromInput(bool isModify = false)
 {
-    cin.ignore();
-    cout << "\nEnter class ID: ";
+    if(!isModify){
+        cin.ignore();
+        cout << "\nEnter class ID: ";
+    }
     getline(cin, this->id);
     cout << "Enter class name: ";
     getline(cin, this->name);
@@ -102,11 +104,6 @@ void Class::showData()
     cout << "\t|" << left << setw(11) << this->id;
     cout << "|" << left << setw(20) << this->name;
     cout << "|" << left << setw(8) << this->year << "|";
-
-
-    // cout << "\nClass ID: " << this->id << "\n";
-    // cout << "Class name: " << this->name << "\n";
-    // cout << "School year begin: " << this->year < "\n";
 }
 
 ofstream &operator<<(ofstream &out, Class &clas)

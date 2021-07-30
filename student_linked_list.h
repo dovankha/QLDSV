@@ -23,7 +23,7 @@ public:
     int is_contain_id(string id);
     int is_contain_id_except(string id, string except);
 
-    void sort();
+    void ssort();
     void swapp(Student &A, Student &B);
     void show_data();
 
@@ -57,22 +57,33 @@ void Student_linked_list::swapp(Student &A, Student &B)
     B = C;
 }
 
-void Student_linked_list::sort()
+void Student_linked_list::ssort()
 {
-    auto min = head;
+    // auto min = head;
+    // for (auto i = head; i != nullptr && i->next != nullptr; i = i->next)
+    // {
+    //     min = i;
+    //     for (auto j = i->next; j != nullptr; j = j->next)
+    //     {
+    //         if (j->data.get_id() < min->data.get_id())
+    //         {
+    //             min = j;
+    //         }
+    //     }
+    //     if (min != i)
+    //     {
+    //         swapp(i->data, min->data);
+    //     }
+    // }
+
     for (auto i = head; i != nullptr && i->next != nullptr; i = i->next)
     {
-        min = i;
         for (auto j = i->next; j != nullptr; j = j->next)
         {
-            if (j->data.get_id() < min->data.get_id())
+            if (j->data.get_first_name() < i->data.get_first_name())
             {
-                min = j;
+                swapp(i->data, j->data);
             }
-        }
-        if (min != i)
-        {
-            swapp(i->data, min->data);
         }
     }
 }
@@ -222,7 +233,7 @@ void Student_linked_list::remove_by_id(string id)
 {
     if (empty())
     {
-        cout << " point list empty";
+        cout << "Student list doesn't exist";
         return;
     }
     if (id == head->data.get_id())
