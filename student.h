@@ -1,5 +1,6 @@
 #pragma once
 #include "Point_linked_list.h"
+#include <iomanip>
 
 class Student
 {
@@ -116,6 +117,9 @@ ifstream &operator>>(ifstream &in, Student &Student)
     getline(in, Student.last_name, ',');
     getline(in, Student.sex, ',');
     getline(in, Student.number_phone, ',');
+    // doc ca dau enter
+    string temp;
+    getline(in, temp);
     return in;
 }
 
@@ -136,10 +140,17 @@ void Student::getDataFromInput()
 
 void Student::showData()
 {
-    cout << "\nYour ID: " << this->id;
-    cout << "\nYour name: " << this->last_name << " " << this->first_name;
-    cout << "\nYour sex: " << this->sex;
-    cout << "\nYour number phone: " << this->number_phone;
+    cout << "\t|" << left << setw(11) << this->id;
+    cout << "|" << left << setw(15) << this->first_name;
+    cout << "|" << left << setw(19) << this->last_name;
+    cout << "|" << left << setw(7) << this->sex;
+    cout << "|" << left << setw(13) << this->number_phone << "|";
+    
+    
+    // cout << "\nYour ID: " << this->id;
+    // cout << "\nYour name: " << this->last_name << " " << this->first_name;
+    // cout << "\nYour sex: " << this->sex;
+    // cout << "\nYour number phone: " << this->number_phone;
 }
 
 Student::Student()

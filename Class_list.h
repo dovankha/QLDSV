@@ -1,5 +1,6 @@
 #pragma once
 #include "Class.h"
+#include <iomanip>
 
 class Classes_list
 {
@@ -49,12 +50,11 @@ void Classes_list::delete_by_id(string classId)
     {
         if (data[i]->get_id() == classId)
         {
-            delete data[position];
-            for (int i = position; i < size - 1; i++)
+            delete data[i];
+            for (int j = i; j < size - 1; j++)
             {
-                data[i] = data[i + 1];
+                data[j] = data[j + 1];
             }
-            //data[size] = nullptr;
             size--;
         }
     }
@@ -167,7 +167,6 @@ void Classes_list::delete_at(int position)
     {
         data[i] = data[i + 1];
     }
-    //data[size] = nullptr;
     size--;
 }
 
@@ -185,11 +184,17 @@ int Classes_list::contain_id(string id)
 
 void Classes_list::show_data()
 {
+    cout << "\n\t\t======= CLASS LIST =======\n\n";
+    cout << "\t" << "+-----------+--------------------+--------+" << endl;
+    cout << "\t" << left << setw(12) << "| Class ID" << left << setw(21) << "|       Name" << left << setw(10) << "|  Year  |\n";
+    cout << "\t" << "+-----------+--------------------+--------+" << endl;
+
     for (int i = 0; i < size; i++)
     {
         data[i]->showData();
         cout << endl;
     }
+    cout << "\t" << "+-----------+--------------------+--------+" << endl;
 }
 
 void Classes_list::set_students_linked_list(Student_linked_list *student_linked_list, int index)

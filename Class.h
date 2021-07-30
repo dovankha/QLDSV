@@ -91,18 +91,22 @@ void Class::getInfoFromInput()
     cin.ignore();
     cout << "\nEnter class ID: ";
     getline(cin, this->id);
-    cout << "\nEnter class name: ";
+    cout << "Enter class name: ";
     getline(cin, this->name);
-    cout << "\nEnter school year begin: ";
+    cout << "Enter school year begin: ";
     cin >> this->year;
 }
 
 void Class::showData()
 {
-    cout << "\nClass ID: " << this->id << "\n";
-    cout << "id length: " << this->id.length() << "\n";
-    cout << "Class name: " << this->name << "\n";
-    cout << "School year begin: " << this->year < "\n";
+    cout << "\t|" << left << setw(11) << this->id;
+    cout << "|" << left << setw(20) << this->name;
+    cout << "|" << left << setw(8) << this->year << "|";
+
+
+    // cout << "\nClass ID: " << this->id << "\n";
+    // cout << "Class name: " << this->name << "\n";
+    // cout << "School year begin: " << this->year < "\n";
 }
 
 ofstream &operator<<(ofstream &out, Class &clas)

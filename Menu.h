@@ -74,9 +74,27 @@ void menu()
                     cout << "\nSuccessful!" << endl;
                     getch();
                 }
+                else if (choice == 2)
+                {
+                    string classID;
+                    cout << "\nEnter class ID to delete: ";
+                    cin.ignore();
+                    getline(cin, classID);
+                    class_list->delete_by_id(classID);
+                    cout << "\nSuccessful!" << endl;
+                    getch();
+                }
+                else if (choice == 3)
+                {
+                    string classID;
+                    cout << "\nEnter class ID to modify: ";
+                    cin.ignore();
+                    getline(cin, classID);
+
+                    // mofify class
+                }
                 else if (choice == 4)
                 {
-                    cout << "\n\t====== CLASS LIST =======" << endl;
                     class_list->show_data();
                     getch();
                 }
@@ -86,18 +104,64 @@ void menu()
                 }
             }
         }
-        else if (choice == 4)
+        else if (choice == 2)
         {
-            insertStudent();
-            DM.save_classes_list(class_list);
-            cout << "\nSuccessful!" << endl;
-            getch();
+            while (1)
+            {
+                system("cls");
+                cout << "\n\t+---------------------------------------+";
+                cout << "\n\t|       ***** STUDENT CLASS *****       |";
+                cout << "\n\t|            1. Add student             |";
+                cout << "\n\t|            2. Delete student          |";
+                cout << "\n\t|            3. Modify student          |";
+                cout << "\n\t|            4. Show student list       |";
+                cout << "\n\t|            0. Exit                    |";
+                cout << "\n\t+---------------------------------------+";
+
+                do
+                {
+                    cout << "\n\nMake a choice: ";
+                    cin >> choice;
+                    if (choice < 0 || choice > 4)
+                    {
+                        cout << "Unhappy choice!" << endl;
+                        getch();
+                    }
+                } while (choice < 0 || choice > 4);
+
+                if (choice == 1)
+                {
+                    insertStudent();
+                    DM.save_classes_list(class_list);
+                    cout << "\nSuccessful!" << endl;
+                    getch();
+                }
+                else if (choice == 2)
+                {
+                    // phai nhap class id truoc
+                    string student_ID;
+                    cout << "\nEnter student ID to delete: ";
+                    cin.ignore();
+                    getline(cin, student_ID);
+                    Student_linked_list *student_list = nullptr;
+                    student_list->remove_by_id(student_ID);
+                    cout << "\nSuccessful!" << endl;
+                    getch();
+                }
+
+                else if (choice == 4)
+                {
+                    // bị enter xuống dòng
+                    show_student_by_class();
+                    getch();
+                }
+                else
+                {
+                    break;
+                }
+            }
         }
-        else if (choice == 5)
-        {
-            show_student_by_class();
-            getch();
-        }
+
         else
         {
             break;
@@ -153,7 +217,7 @@ void insertStudent()
         class_list->set_students_linked(classId, studentList);
 
         Student_linked_list *studentList2 = class_list->get_students_linked(classId);
-        getch();
+        // getch();
     }
     catch (string &e)
     {

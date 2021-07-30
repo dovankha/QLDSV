@@ -1,5 +1,6 @@
 #pragma once
 #include "Student_node.h"
+#include <iomanip>
 
 class Student_linked_list
 {
@@ -36,11 +37,17 @@ public:
 
 void Student_linked_list::show_data()
 {
+    cout << "\n\t\t\t======= STUDENT LIST BY CLASS ID =======\n\n";
+    cout << "\t" << "+-----------+---------------+-------------------+-------+-------------+" << endl;
+    cout << "\t" << left << setw(12) << "|    ID" << left << setw(16) << "|   First Name" 
+         << left << setw(20) << "|     Last Name" << left << setw(8) << "| Sex" << left << setw(12) << "| NumberPhone |\n";
+    cout << "\t" << "+-----------+---------------+-------------------+-------+-------------+" << endl;
     for (Student_node *temp = head; temp != nullptr; temp = temp->next)
     {
         temp->data.showData();
         cout << endl;
     }
+    cout << "\t" << "+-----------+---------------+-------------------+-------+-------------+" << endl;
 }
 
 void Student_linked_list::swapp(Student &A, Student &B)
