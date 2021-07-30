@@ -7,9 +7,12 @@ int choice; // choice of menu
 string class_list_file_path = "Data/Classes/classes_list.csv";
 Database_Manager DM;
 Classes_list *class_list = DM.read_classes_list(class_list_file_path);
+Subject_tree *subject_node = nullptr;
 
 void menu_class();
 void menu_student();
+void menu_subject();
+void menu_point();
 void insertStudent();
 void deleteStudent();
 void show_student_by_class();
@@ -20,17 +23,18 @@ void menu()
     while (1)
     {
         system("cls");
+        SetColor(Color::CYAN);
         cout << "\t\t+---------------------------------------+" << endl
              << "\t\t|             ****MENU****              |" << endl
              << "\t\t|               1. Class                |" << endl
              << "\t\t|               2. Student              |" << endl
-             << "\t\t|               3. Point                |" << endl
-             << "\t\t|               4. ABCD                 |" << endl
+             << "\t\t|               3. Subject              |" << endl
+             << "\t\t|               4. Point                |" << endl
              << "\t\t|               0. Exit                 |" << endl
              << "\t\t+---------------------------------------+" << endl
              << endl
              << endl;
-
+        SetColor(Color::WHITE);
         do
         {
             cout << "\n\nMake a choice: ";
@@ -50,6 +54,10 @@ void menu()
         {
             menu_student();
         }
+        else if (choice == 3)
+        {
+            menu_subject();
+        }
         else
         {
             break;
@@ -63,6 +71,7 @@ void menu_class()
     while (1)
     {
         system("cls");
+        SetColor(Color::BROWN);
         cout << "\n\t+---------------------------------------+";
         cout << "\n\t|         ***** MENU CLASS *****        |";
         cout << "\n\t|            1. Add class               |";
@@ -71,7 +80,7 @@ void menu_class()
         cout << "\n\t|            4. Show class list         |";
         cout << "\n\t|            0. Exit                    |";
         cout << "\n\t+---------------------------------------+";
-
+        SetColor(Color::WHITE);
         do
         {
             cout << "\n\nMake a choice: ";
@@ -104,6 +113,7 @@ void menu_class()
         }
         else if (choice == 2)
         {
+            // bị bug - xóa lớp nhưng ngoài file student ko xóa
             string classID;
             cout << "\nEnter class ID to delete: ";
             cin.ignore();
@@ -119,13 +129,13 @@ void menu_class()
                 DM.save_classes_list(class_list);
                 SetColor(Color::GREEN);
                 cout << "\nSuccessful!" << endl;
-                SetColor(Color::DARKGRAY);
+                SetColor(Color::WHITE);
             }
             catch (string &e)
             {
                 SetColor(Color::RED);
                 cout << "error: " << e << "\n";
-                SetColor(Color::DARKGRAY);
+                SetColor(Color::WHITE);
             }
 
             getch();
@@ -148,13 +158,13 @@ void menu_class()
                 DM.save_classes_list(class_list);
                 SetColor(Color::GREEN);
                 cout << "\nSuccessful!" << endl;
-                SetColor(Color::DARKGRAY);
+                SetColor(Color::WHITE);
             }
             catch (string &e)
             {
                 SetColor(Color::RED);
                 cout << "error: " << e << "\n";
-                SetColor(Color::DARKGRAY);
+                SetColor(Color::WHITE);
             }
             getch();
         }
@@ -170,26 +180,21 @@ void menu_class()
     }
 }
 
-// nhap lop id
-// nhap lan thi
-// nhap ma sinh vien
-// tim co sinh vien : nhap diem cho no
-
-
 void menu_student()
 {
     while (1)
     {
         system("cls");
+        SetColor(Color::YELLOW);
         cout << "\n\t+---------------------------------------+";
-        cout << "\n\t|       ***** STUDENT CLASS *****       |";
+        cout << "\n\t|       ***** MENU STUDENT *****        |";
         cout << "\n\t|            1. Add student             |";
         cout << "\n\t|            2. Delete student          |";
         cout << "\n\t|            3. Modify student          |";
         cout << "\n\t|            4. Show student list       |";
         cout << "\n\t|            0. Exit                    |";
         cout << "\n\t+---------------------------------------+";
-
+        SetColor(Color::WHITE);
         do
         {
             cout << "\n\nMake a choice: ";
@@ -216,6 +221,7 @@ void menu_student()
 
         else if (choice == 4)
         {
+            // bị bug - chỗ đọc file (có id lop nhung ko doc duoc sinh vien).
             show_student_by_class();
             getch();
         }
@@ -225,6 +231,52 @@ void menu_student()
         }
     }
 }
+
+void menu_subject()
+{
+    while (1)
+    {
+        system("cls");
+        SetColor(Color::MAGENTA);
+        cout << "\n\t+---------------------------------------+";
+        cout << "\n\t|       ***** MENU SUBJECT *****        |";
+        cout << "\n\t|            1. Add subject             |";
+        cout << "\n\t|            2. Delete subject          |";
+        cout << "\n\t|            3. Modify subject          |";
+        cout << "\n\t|            4. Show subject list       |";
+        cout << "\n\t|            0. Exit                    |";
+        cout << "\n\t+---------------------------------------+";
+        SetColor(Color::WHITE);
+        do
+        {
+            cout << "\n\nMake a choice: ";
+            cin >> choice;
+            if (choice < 0 || choice > 4)
+            {
+                cout << "Unhappy choice!" << endl;
+                getch();
+            }
+        } while (choice < 0 || choice > 4);
+
+        if (choice == 1)
+        {
+            Subject subject;
+            subject.getDataFromInput();
+            getch();
+        }
+        else
+        {
+            break;
+        }
+    }
+}
+
+// nhap lop id
+// nhap lan thi
+// nhap ma sinh vien
+// tim co sinh vien : nhap diem cho no
+
+
 
 void show_student_by_class()
 {
@@ -312,5 +364,5 @@ void deleteStudent()
         SetColor(Color::RED);
         cout << "error: " << e << "\n";
     }
-    SetColor(Color::DARKGRAY);
+    SetColor(Color::WHITE);
 }
