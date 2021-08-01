@@ -65,6 +65,7 @@ void Subject::showData()
     cout << "|" << left << setw(9) <<this->STCLT;
     cout << "|" << left << setw(9) <<this->STCTH << "|";
     cout << "\n\t" << "+------------+-----------------------------+---------+---------+" << endl;
+    
     // cout << "\nSubject ID: " << this->subject_id;
     // cout << "\nSubject name: " << this->subject_name;
     // cout << "\nSTCLT of subject: " << this->STCLT;

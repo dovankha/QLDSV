@@ -97,10 +97,20 @@ Subject_node *Subject_tree::search(Subject_node *node, Subject data)
 
 void Subject_tree::show_subject_data(Subject_node *node)
 {
-    cout << "\nSubject ID is " << node->data.get_subject_id();
-    cout << "\nSubject name is " << node->data.get_subject_name();
-    cout << "\nSTCLT of subject: " << node->data.get_STCLT();
-    cout << "\nSTCTH of subject: " << node->data.get_STCTH();
+    cout << "\n\t\t\t    ====== SUBJECT LIST =======" << endl;
+    cout << "\t" << "+------------+-----------------------------+---------+---------+" << endl;
+    cout << "\t" << left << setw(13) << "| Subject ID" << left << setw(30) << "|            Name" << left << setw(10) << "|  STCLT" << left << setw(10) << "|  STCTH  |\n";
+    cout << "\t" << "+------------+-----------------------------+---------+---------+" << endl;
+    cout << "\t|" << left << setw(12) << node->data.get_subject_id();
+    cout << "|" << left << setw(29) << node->data.get_subject_name();
+    cout << "|" << left << setw(9) << node->data.get_STCLT();
+    cout << "|" << left << setw(9) << node->data.get_STCTH() << "|\n";
+    cout << "\t" << "+------------+-----------------------------+---------+---------+" << endl;
+    
+    // cout << "\nSubject ID is " << node->data.get_subject_id();
+    // cout << "\nSubject name is " << node->data.get_subject_name();
+    // cout << "\nSTCLT of subject: " << node->data.get_STCLT();
+    // cout << "\nSTCTH of subject: " << node->data.get_STCTH();
 }
 
 void Subject_tree::show_subject_tree(Subject_node *node)
