@@ -8,7 +8,8 @@ string class_list_file_path = "Data/Classes/classes_list.csv";
 string subject_list_file_path = "Data/subject_list.csv";
 Database_Manager DM;
 Classes_list *class_list = DM.read_classes_list(class_list_file_path);
-Subject subject;
+
+Subject_tree *subject_tree = DM.read_subject_tree(subject_list_file_path);
 
 void menu_class();
 void menu_student();
@@ -271,7 +272,7 @@ void menu_subject()
         }
         else if (choice == 4)
         {
-            subject.showData();
+            subject_tree->showTree();
             getch();
         }
 
@@ -291,12 +292,12 @@ void insertSubject()
 {
     try
     {
-        Subject_tree *subject_tree = new Subject_tree();
         if (subject_tree->get_size() == 0)
         {
             cout << "\nSubject list is empty!\n";
-            // studentList = new Student_linked_list();
+
         }
+        Subject subject;
         subject.getDataFromInput();
        
 
@@ -305,7 +306,7 @@ void insertSubject()
         //     throw string("id existed!!");
         // }
 
-        subject_tree->insert(subject_tree, subject);
+       subject_tree->insert(subject);
     }
     catch (string &e)
     {

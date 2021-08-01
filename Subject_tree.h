@@ -5,23 +5,47 @@ class Subject_tree
 {
 
 public:
-    Subject_node *root;
-    int size = 0;
+    
+
+    void insert(Subject data);
+    void showTree();
+
+
+    int get_size();
+
 
     Subject_node *get_root() const;
     void set_root(Subject_node *root);
-    Subject_node *insert(Subject_node *, Subject);
+
+    
+    Subject_tree();
+    ~Subject_tree();
+
+private:
+    Subject_node *root;
+    int size = 0;
+
+
+
+    Subject_node *insert_r(Subject_node *, Subject data);
     Subject_node *search(Subject_node *, Subject);
     Subject_node *deleteNode(Subject_node *, Subject);
     Subject_node *minValueNode(Subject_node *);
     void free_memory(Subject_node *node);
-    int get_size();
-    void show_subject_data(Subject_node *root);
+    void show_subject_data(Subject_node *node);
     void show_subject_tree(Subject_node *);
 
-    Subject_tree();
-    ~Subject_tree();
 };
+
+void Subject_tree::showTree(){
+    show_subject_tree(root);
+}
+
+void Subject_tree::insert(Subject data)
+{
+    this->root = insert_r(root,data);
+    size++;
+}
 
 Subject_node *Subject_tree::get_root() const
 {
@@ -38,38 +62,38 @@ int Subject_tree::get_size()
     return size;
 }
 
-Subject_node *Subject_tree::insert(Subject_node *root, Subject data)
+Subject_node *Subject_tree::insert_r(Subject_node *node, Subject data)
 {
-    if (!root)
+    if (!node)
     {
         return new Subject_node(data);
     }
-    if (data.get_subject_id() > root->data.get_subject_id())
+    if (data.get_subject_id() > node->data.get_subject_id())
     {
-        root->right = insert(root->right, data);
+        node->right = insert_r(node->right, data);
     }
     else
     {
-        root->left = insert(root->left, data);
+        node->left = insert_r(node->left, data);
     }
-    return root;
+    return node;
 }
 
-Subject_node *Subject_tree::search(Subject_node *root, Subject data)
+Subject_node *Subject_tree::search(Subject_node *node, Subject data)
 {
-    if (root != NULL)
+    if (node != NULL)
     {
-        if (data.get_subject_id() == root->data.get_subject_id())
+        if (data.get_subject_id() == node->data.get_subject_id())
         {
-            return root;
+            return node;
         }
-        if (data.get_subject_id() < root->data.get_subject_id())
+        if (data.get_subject_id() < node->data.get_subject_id())
         {
-            return search(root->left, data);
+            return search(node->left, data);
         }
         else
         {
-            return search(root->right, data);
+            return search(node->right, data);
         }
     }
     else
@@ -78,21 +102,21 @@ Subject_node *Subject_tree::search(Subject_node *root, Subject data)
     }
 }
 
-void Subject_tree::show_subject_data(Subject_node *root)
+void Subject_tree::show_subject_data(Subject_node *node)
 {
-    cout << "\nSubject ID is " << root->data.get_subject_id();
-    cout << "\nSubject name is " << root->data.get_subject_name();
-    cout << "\nSTCLT of subject: " << root->data.get_STCLT();
-    cout << "\nSTCTH of subject: " << root->data.get_STCTH();
+    cout << "\nSubject ID is " << node->data.get_subject_id();
+    cout << "\nSubject name is " << node->data.get_subject_name();
+    cout << "\nSTCLT of subject: " << node->data.get_STCLT();
+    cout << "\nSTCTH of subject: " << node->data.get_STCTH();
 }
 
-void Subject_tree::show_subject_tree(Subject_node *root)
+void Subject_tree::show_subject_tree(Subject_node *node)
 {
-    if (!root)
+    if (!node)
         return;
-    show_subject_tree(root->left);
-    show_subject_data(root);
-    show_subject_tree(root->right);
+    show_subject_tree(node->left);
+    show_subject_data(node);
+    show_subject_tree(node->right);
 }
 
 Subject_node *Subject_tree::minValueNode(Subject_node *node)
@@ -105,35 +129,35 @@ Subject_node *Subject_tree::minValueNode(Subject_node *node)
     return current;
 }
 
-Subject_node *Subject_tree::deleteNode(Subject_node *root, Subject data)
+Subject_node *Subject_tree::deleteNode(Subject_node *node, Subject data)
 {
-    if (root == NULL)
-        return root;
-    if (data.get_subject_id() < root->data.get_subject_id())
-        root->left = deleteNode(root->left, data);
-    else if (data.get_subject_id() > root->data.get_subject_id())
-        root->right = deleteNode(root->right, data);
+    if (node == NULL)
+        return node;
+    if (data.get_subject_id() < node->data.get_subject_id())
+        node->left = deleteNode(node->left, data);
+    else if (data.get_subject_id() > node->data.get_subject_id())
+        node->right = deleteNode(node->right, data);
     else
     {
-        if (root->left == NULL and root->right == NULL)
+        if (node->left == NULL and node->right == NULL)
             return NULL;
-        else if (root->left == NULL)
+        else if (node->left == NULL)
         {
-            Subject_node *temp = root->right;
-            free(root);
+            Subject_node *temp = node->right;
+            free(node);
             return temp;
         }
-        else if (root->right == NULL)
+        else if (node->right == NULL)
         {
-            Subject_node *temp = root->left;
-            free(root);
+            Subject_node *temp = node->left;
+            free(node);
             return temp;
         }
-        Subject_node *temp = Subject_tree::minValueNode(root->right);
-        root->data = temp->data;
-        root->right = deleteNode(root->right, temp->data);
+        Subject_node *temp = Subject_tree::minValueNode(node->right);
+        node->data = temp->data;
+        node->right = deleteNode(node->right, temp->data);
     }
-    return root;
+    return node;
 }
 
 void Subject_tree::free_memory(Subject_node *node)
@@ -150,6 +174,7 @@ void Subject_tree::free_memory(Subject_node *node)
 
 Subject_tree::Subject_tree()
 {
+    root = nullptr;
 }
 
 Subject_tree::~Subject_tree()
