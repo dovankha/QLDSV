@@ -5,27 +5,20 @@ class Subject_tree
 {
 
 public:
-    
-
     void insert(Subject data);
     void showTree();
 
-
     int get_size();
-
 
     Subject_node *get_root() const;
     void set_root(Subject_node *root);
 
-    
     Subject_tree();
     ~Subject_tree();
 
 private:
     Subject_node *root;
     int size = 0;
-
-
 
     Subject_node *insert_r(Subject_node *, Subject data);
     Subject_node *search(Subject_node *, Subject);
@@ -34,16 +27,16 @@ private:
     void free_memory(Subject_node *node);
     void show_subject_data(Subject_node *node);
     void show_subject_tree(Subject_node *);
-
 };
 
-void Subject_tree::showTree(){
+void Subject_tree::showTree()
+{
     show_subject_tree(root);
 }
 
 void Subject_tree::insert(Subject data)
 {
-    this->root = insert_r(root,data);
+    this->root = insert_r(root, data);
     size++;
 }
 
