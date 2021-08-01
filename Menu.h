@@ -5,14 +5,17 @@
 int choice; // choice of menu
 
 string class_list_file_path = "Data/Classes/classes_list.csv";
+string subject_list_file_path = "Data/subject_list.csv";
 Database_Manager DM;
 Classes_list *class_list = DM.read_classes_list(class_list_file_path);
-Subject_tree *subject_node = nullptr;
+Subject subject;
 
 void menu_class();
 void menu_student();
 void menu_subject();
 void menu_point();
+void insertSubject();
+void deleteSubject();
 void insertStudent();
 void deleteStudent();
 void show_student_by_class();
@@ -103,12 +106,16 @@ void menu_class()
                 }
                 class_list->push_back(clas);
                 DM.save_classes_list(class_list);
+                SetColor(Color::GREEN);
                 cout << "\nSuccessful!" << endl;
+                SetColor(Color::WHITE);
             }
             catch (string &e)
             {
+                SetColor(Color::RED);
                 cout << "error: " << e << "\n";
             }
+            SetColor(Color::WHITE);
             getch();
         }
         else if (choice == 2)
@@ -260,10 +267,14 @@ void menu_subject()
 
         if (choice == 1)
         {
-            Subject subject;
-            subject.getDataFromInput();
+            insertSubject();
+        }
+        else if (choice == 4)
+        {
+            subject.showData();
             getch();
         }
+
         else
         {
             break;
@@ -276,7 +287,31 @@ void menu_subject()
 // nhap ma sinh vien
 // tim co sinh vien : nhap diem cho no
 
+void insertSubject()
+{
+    try
+    {
+        Subject_tree *subject_tree = new Subject_tree();
+        if (subject_tree->get_size() == 0)
+        {
+            cout << "\nSubject list is empty!\n";
+            // studentList = new Student_linked_list();
+        }
+        subject.getDataFromInput();
+       
 
+        // if ()
+        // {
+        //     throw string("id existed!!");
+        // }
+
+        subject_tree->insert(subject_tree, subject);
+    }
+    catch (string &e)
+    {
+        cout << "error: " << e << "\n";
+    }
+}
 
 void show_student_by_class()
 {

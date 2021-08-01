@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <iomanip>
 
 using namespace std;
 
@@ -45,20 +46,29 @@ void Subject::getDataFromInput()
     cin.ignore();
     cout << "\nEnter ID of subject: ";
     getline(cin, this->subject_id);
-    cout << "\nEnter the name of subject: ";
+    cout << "Enter the name of subject: ";
     getline(cin, this->subject_name);
-    cout << "\nEnter number of STCLT: ";
+    cout << "Enter number of STCLT: ";
     cin >> this->STCLT;
-    cout << "\nEnter number of STCTH: ";
+    cout << "Enter number of STCTH: ";
     cin >> this->STCTH;
 }
 
 void Subject::showData()
 {
-    cout << "\nSubject ID: " << this->subject_id;
-    cout << "\nSubject name: " << this->subject_name;
-    cout << "\nSTCLT of subject: " << this->STCLT;
-    cout << "\nSTCTH of subject: " << this->STCTH;
+    cout << "\n\t\t\t    ====== SUBJECT LIST =======" << endl;
+    cout << "\t" << "+------------+-----------------------------+---------+---------+" << endl;
+    cout << "\t" << left << setw(13) << "| Subject ID" << left << setw(30) << "|            Name" << left << setw(10) << "|  STCLT" << left << setw(10) << "|  STCTH  |\n";
+    cout << "\t" << "+------------+-----------------------------+---------+---------+" << endl;
+    cout << "\t|" << left << setw(12) <<this->subject_id;
+    cout << "|" << left << setw(29) <<this->subject_name;
+    cout << "|" << left << setw(9) <<this->STCLT;
+    cout << "|" << left << setw(9) <<this->STCTH << "|";
+    cout << "\n\t" << "+------------+-----------------------------+---------+---------+" << endl;
+    // cout << "\nSubject ID: " << this->subject_id;
+    // cout << "\nSubject name: " << this->subject_name;
+    // cout << "\nSTCLT of subject: " << this->STCLT;
+    // cout << "\nSTCTH of subject: " << this->STCTH;
 }
 
 Subject::Subject(string subject_id, string subject_name, int STCLT, int STCTH)

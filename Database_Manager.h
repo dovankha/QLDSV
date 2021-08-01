@@ -37,7 +37,7 @@ public:
     void save_subject(Subject &subject, ofstream &file);
     Subject read_subject(ifstream &file);
     void save_subject_tree(Subject_tree *subject_tree);
-    Subject_tree *read_subject_tree(string file_path);
+    Subject_tree *read_subject_tree();
 
     Database_Manager();
     ~Database_Manager();
@@ -81,6 +81,37 @@ void Database_Manager::save_subject_tree(Subject_tree *subject_tree)
         }
     }
 }
+
+// Subject_tree *Database_Manager::read_subject_tree()
+// {
+//     ifstream file(subject_list_file_path);
+//     if (!file.is_open())
+//     {
+//         return nullptr;
+//     }
+
+//     int size = 0;
+//     string line;
+
+//     file >> size;
+//     getline(file, line, ',');
+
+//     if (size == 0)
+//     {
+//         return nullptr;
+//     }
+
+//     Subject_tree *Subject_tree = new Subject_tree;
+
+//     for (int i = 0; i < size; i++)
+//     {
+//         Subject subject = read_subject(file);
+//         subject_tree->insert(subject);
+//     }
+//     file.close();
+
+//     return Subject_tree;
+// }
 
 void Database_Manager::save_point(Point &point, ofstream &file)
 {

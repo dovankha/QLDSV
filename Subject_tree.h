@@ -16,8 +16,8 @@ public:
     Subject_node *minValueNode(Subject_node *);
     void free_memory(Subject_node *node);
     int get_size();
-    void show_subject_tree(Subject_node *);
     void show_subject_data(Subject_node *root);
+    void show_subject_tree(Subject_node *);
 
     Subject_tree();
     ~Subject_tree();
