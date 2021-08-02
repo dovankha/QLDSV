@@ -9,6 +9,7 @@
 #include "Class_list.h"
 #include "Subject.h"
 #include "Subject_tree.h"
+#include "Graphic.h"
 
 class Database_Manager
 {
@@ -37,7 +38,7 @@ public:
     void save_subject(Subject &subject, ofstream &file);
     Subject read_subject(ifstream &file);
     void save_subject_tree(Subject_tree *subject_tree);
-    Subject_tree *read_subject_tree(string filePath);
+    Subject_tree *read_subject_tree(string file_path);
 
     Database_Manager();
     ~Database_Manager();
@@ -82,9 +83,9 @@ void Database_Manager::save_subject_tree(Subject_tree *subject_tree)
     }
 }
 
-Subject_tree *Database_Manager::read_subject_tree(string filePath)
+Subject_tree *Database_Manager::read_subject_tree(string file_path)
 {
-    ifstream file(filePath);
+    ifstream file(file_path);
     if (!file.is_open())
     {
         return new Subject_tree();
@@ -94,7 +95,7 @@ Subject_tree *Database_Manager::read_subject_tree(string filePath)
     string line;
 
     file >> size;
-    getline(file, line, ',');
+    getline(file, line);
 
     if (size == 0)
     {

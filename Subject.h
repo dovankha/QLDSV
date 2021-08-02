@@ -54,23 +54,13 @@ void Subject::getDataFromInput()
     cin >> this->STCTH;
 }
 
-void Subject::showData()
-{
-    cout << "\n\t\t\t    ====== SUBJECT LIST =======" << endl;
-    cout << "\t" << "+------------+-----------------------------+---------+---------+" << endl;
-    cout << "\t" << left << setw(13) << "| Subject ID" << left << setw(30) << "|            Name" << left << setw(10) << "|  STCLT" << left << setw(10) << "|  STCTH  |\n";
-    cout << "\t" << "+------------+-----------------------------+---------+---------+" << endl;
-    cout << "\t|" << left << setw(12) <<this->subject_id;
-    cout << "|" << left << setw(29) <<this->subject_name;
-    cout << "|" << left << setw(9) <<this->STCLT;
-    cout << "|" << left << setw(9) <<this->STCTH << "|";
-    cout << "\n\t" << "+------------+-----------------------------+---------+---------+" << endl;
-    
-    // cout << "\nSubject ID: " << this->subject_id;
-    // cout << "\nSubject name: " << this->subject_name;
-    // cout << "\nSTCLT of subject: " << this->STCLT;
-    // cout << "\nSTCTH of subject: " << this->STCTH;
-}
+// void Subject::showData()
+// {
+//     // cout << "\nSubject ID: " << this->subject_id;
+//     // cout << "\nSubject name: " << this->subject_name;
+//     // cout << "\nSTCLT of subject: " << this->STCLT;
+//     // cout << "\nSTCTH of subject: " << this->STCTH;
+// }
 
 Subject::Subject(string subject_id, string subject_name, int STCLT, int STCTH)
 {
@@ -128,12 +118,12 @@ void Subject::set_STCTH(int STCTH)
 ifstream &operator>>(ifstream &in, Subject &other)
 {
     string line;
+
     getline(in, other.subject_id, ',');
     getline(in, other.subject_name, ',');
     in >> other.STCLT;
     getline(in, line, ',');
     in >> other.STCTH;
-
     getline(in, line);
     return in;
 }

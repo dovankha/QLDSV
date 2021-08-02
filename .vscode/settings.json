@@ -10,7 +10,14 @@
         "xutility": "cpp",
         "algorithm": "cpp",
         "iomanip": "cpp",
-        "ios": "cpp"
+        "ios": "cpp",
+        "atomic": "cpp",
+        "cctype": "cpp",
+        "cstdio": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp",
+        "xmemory": "cpp",
+        "xtr1common": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

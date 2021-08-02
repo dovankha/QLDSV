@@ -18,7 +18,7 @@ public:
     void insert_at(int position, Student data);
     void remove_at(int position);
     void remove_by_id(string id);
-
+    void replace_student_by_id(string id);
     void set_points_linked_list(Point_linked_list *point_linked_list, int pos);
     int is_contain_id(string id);
     int is_contain_id_except(string id, string except);
@@ -48,6 +48,17 @@ void Student_linked_list::show_data()
         cout << endl;
     }
     cout << "\t" << "+-----------+---------------+-------------------+-------+-------------+" << endl;
+}
+
+void Student_linked_list::replace_student_by_id(string id)
+{
+    for (auto i = head; i != nullptr; i = i->next)
+    {
+        if (i->data.get_id() == id)
+        {
+            i->data.getDataFromInput();
+        }
+    }
 }
 
 void Student_linked_list::swapp(Student &A, Student &B)
