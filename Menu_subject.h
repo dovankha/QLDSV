@@ -21,18 +21,26 @@ void menu_subject()
         cout << "\n\t|            0. Exit                    |";
         cout << "\n\t+---------------------------------------+";
         SetColor(Color::WHITE);
-        do
+        cout << "\n\nMake a choice: ";
+        cin >> choice;
+        
+        if (cin.fail())
         {
-            cout << "\n\nMake a choice: ";
-            cin >> choice;
-            if (choice < 0 || choice > 4)
-            {
-                cout << "Unhappy choice!" << endl;
-                getch();
-            }
-        } while (choice < 0 || choice > 4);
+            SetColor(Color::RED);
+            cout << "\n[Error]: Only numbers!!" << endl;
+            getch();
+            cin.clear();
+            cin.ignore(256, '\n');
+        }
 
-        if (choice == 1)
+        else if (choice < 0 || choice > 5)
+        {
+            SetColor(Color::RED);
+            cout << "\n[Error]: Incorrect choice!!" << endl;
+            getch();
+        }
+
+        else if (choice == 1)
         {
             add_subject();
         }

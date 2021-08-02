@@ -3,7 +3,6 @@
 #include "Menu_student.h"
 #include "Menu_subject.h"
 
-
 void menu()
 {
     while (1)
@@ -21,18 +20,25 @@ void menu()
              << endl
              << endl;
         SetColor(Color::WHITE);
-        do
-        {
-            cout << "\n\nMake a choice: ";
-            cin >> choice;
-            if (choice < 0 || choice > 5)
-            {
-                cout << "Unhappy choice!" << endl;
-                getch();
-            }
-        } while (choice < 0 || choice > 5);
 
-        if (choice == 1)
+        cout << "\n\nMake a choice: ";
+        cin >> choice;
+        if (cin.fail())
+        {
+            SetColor(Color::RED);
+            cout << "\n[Error]: Only numbers!!" << endl;
+            getch();
+            cin.clear();
+            cin.ignore(256, '\n');
+        }
+
+        else if (choice < 0 || choice > 4)
+        {
+            SetColor(Color::RED);
+            cout << "\n[Error]: Incorrect choice!!" << endl;
+            getch();
+        }
+        else if (choice == 1)
         {
             menu_class();
         }

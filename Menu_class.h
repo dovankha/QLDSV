@@ -1,7 +1,6 @@
 #pragma once
 #include "declare_menu.h"
 
-Class clas;
 void add_class();
 void modify_class();
 void remove_class();
@@ -22,18 +21,25 @@ void menu_class()
         cout << "\n\t|            0. Exit                    |";
         cout << "\n\t+---------------------------------------+";
         SetColor(Color::WHITE);
-        do
-        {
-            cout << "\n\nMake a choice: ";
-            cin >> choice;
-            if (choice < 0 || choice > 4)
-            {
-                cout << "Unhappy choice!" << endl;
-                getch();
-            }
-        } while (choice < 0 || choice > 4);
 
-        if (choice == 1)
+        cout << "\n\nMake a choice: ";
+        cin >> choice;
+        if (cin.fail())
+        {
+            SetColor(Color::RED);
+            cout << "\n[Error]: Only numbers!!" << endl;
+            getch();
+            cin.clear();
+            cin.ignore(256, '\n');
+        }
+
+        else if (choice < 0 || choice > 4)
+        {
+            SetColor(Color::RED);
+            cout << "\n[Error]: Incorrect choice!!" << endl;
+            getch();
+        }
+        else if (choice == 1)
         {
             add_class();
         }
