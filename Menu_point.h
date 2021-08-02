@@ -1,25 +1,27 @@
 #pragma once
 #include "declare_menu.h"
 
-Class clas;
-void add_class();
-void modify_class();
-void remove_class();
-void show_class();
 
-void menu_class()
+void add_point();
+void show_point_list();
+void show_average_point();
+
+
+void menu_point()
 {
     while (1)
     {
         system("cls");
-        SetColor(Color::BROWN);
+        SetColor(Color::LIGHTRED);
         cout << "\n\t+---------------------------------------+";
-        cout << "\n\t|         ***** MENU CLASS *****        |";
-        cout << "\n\t|            1. Add class               |";
-        cout << "\n\t|            2. Delete class            |";
-        cout << "\n\t|            3. Modify class            |";
-        cout << "\n\t|            4. Show class list         |";
-        cout << "\n\t|            0. Exit                    |";
+        cout << "\n\t|        ***** MENU POINT *****         |";
+        cout << "\n\t|          1. Add point                 |";
+        cout << "\n\t|          2. Delete point              |";
+        cout << "\n\t|          3. Modify point              |";
+        cout << "\n\t|          4. Show point list           |";
+        cout << "\n\t|          5. Show average point list   |";
+        cout << "\n\t|          6. Show final point list     |";
+        cout << "\n\t|          0. Exit                      |";
         cout << "\n\t+---------------------------------------+";
         SetColor(Color::WHITE);
 
@@ -34,7 +36,7 @@ void menu_class()
             cin.ignore(256, '\n');
         }
 
-        else if (choice < 0 || choice > 4)
+        else if (choice < 0 || choice > 6)
         {
             SetColor(Color::RED);
             cout << "\n[Error]: Incorrect choice!!" << endl;
@@ -42,19 +44,28 @@ void menu_class()
         }
         else if (choice == 1)
         {
-            add_class();
+            cout << "Hello!";
+            getch();
         }
         else if (choice == 2)
         {
-            remove_class();
+            
         }
         else if (choice == 3)
         {
-            modify_class();
+            
         }
         else if (choice == 4)
         {
-            show_class();
+            
+        }
+        else if (choice == 5)
+        {
+
+        }
+        else if (choice == 6)
+        {
+
         }
         else
         {
@@ -63,90 +74,7 @@ void menu_class()
     }
 }
 
-void add_class()
+void add_point()
 {
-    clas.getInfoFromInput();
-    try
-    {
-        if (class_list->contain_id(clas.get_id()) != -1)
-        {
-            throw string("id existed!!");
-        }
-        class_list->push_back(clas);
-        DM.save_classes_list(class_list);
-        SetColor(Color::GREEN);
-        cout << "\nSuccessful!" << endl;
-        SetColor(Color::WHITE);
-    }
-    catch (string &e)
-    {
-        SetColor(Color::RED);
-        cout << "error: " << e << "\n";
-    }
-    SetColor(Color::WHITE);
-    getch();
-}
 
-void modify_class()
-{
-    string classID;
-    cout << "\nEnter class ID to modify: ";
-    cin.ignore();
-    getline(cin, classID);
-
-    try
-    {
-        if (class_list->contain_id(classID) == -1)
-        {
-            throw string("Class id doesn't exist!!");
-        }
-        clas.getInfoFromInput(true); // true khong cho phep sua id
-        class_list->replace_class_by_ID(classID, clas);
-        DM.save_classes_list(class_list);
-        SetColor(Color::GREEN);
-        cout << "\nSuccessful!" << endl;
-        SetColor(Color::WHITE);
-    }
-    catch (string &e)
-    {
-        SetColor(Color::RED);
-        cout << "error: " << e << "\n";
-        SetColor(Color::WHITE);
-    }
-    getch();
-}
-
-void remove_class()
-{
-    // bị bug - xóa lớp nhưng ngoài file student ko xóa
-    string classID;
-    cout << "\nEnter class ID to delete: ";
-    cin.ignore();
-    getline(cin, classID);
-
-    try
-    {
-        if (class_list->contain_id(classID) == -1)
-        {
-            throw string("Class id doesn't exist!!");
-        }
-        class_list->delete_by_id(classID);
-        DM.save_classes_list(class_list);
-        SetColor(Color::GREEN);
-        cout << "\nSuccessful!" << endl;
-        SetColor(Color::WHITE);
-    }
-    catch (string &e)
-    {
-        SetColor(Color::RED);
-        cout << "error: " << e << "\n";
-        SetColor(Color::WHITE);
-    }
-    getch();
-}
-
-void show_class()
-{
-    class_list->show_data();
-    getch();
 }

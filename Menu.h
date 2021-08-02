@@ -2,6 +2,7 @@
 #include "Menu_class.h"
 #include "Menu_student.h"
 #include "Menu_subject.h"
+#include "Menu_point.h"
 
 void menu()
 {
@@ -52,7 +53,7 @@ void menu()
         }
         else if (choice == 4)
         {
-            // menu_point();
+            menu_point();
         }
         else
         {
