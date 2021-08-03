@@ -49,12 +49,11 @@ void menu_point()
         }
         else if (choice == 1)
         {
-            
-            getch();
+            add_point();
         }
         else if (choice == 2)
         {
-            
+            show_point_list();
         }
         else if (choice == 3)
         {
@@ -75,26 +74,39 @@ void add_point()
 {
     string class_id;
     cout << "\nEnter class ID to add point for student: ";
+    cin.ignore();
     getline(cin, class_id);
+    string student_id;
+    cout << "\nEnter student ID: ";
+    cin.ignore();
+    getline(cin, student_id);
 
-    try
+    try 
     {
-        if (class_list->contain_id(classID) == -1)
+        if (class_list->contain_id(class_id) == -1)
         {
             throw string("Class id doesn't exist!!");
         }
-
-        // class_list->delete_by_id(classID);
-        // DM.save_classes_list(class_list);
+        Student_linked_list *studentList = class_list->get_students_linked(class_id);
+        point.addData();
+        studentList->add_point(student_id, point);
         SetColor(Color::GREEN);
         cout << "\nSuccessful!" << endl;
         SetColor(Color::WHITE);
     }
+
     catch (string &e)
     {
         SetColor(Color::RED);
         cout << "error: " << e << "\n";
         SetColor(Color::WHITE);
     }
+    getch();
+}
+
+void show_point_list()
+{
+    point.showData();
+    // point_list->show_data();
     getch();
 }

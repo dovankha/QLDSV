@@ -10,9 +10,10 @@ class Student
     string last_name;
     string sex;
     string number_phone;
-    Point_linked_list *points_list;
+   
 
 public:
+    Point_linked_list *point_list;
     Student(string id, string first_name, string last_name, string sex);
     Student(Student *Student);
     string get_id() const;
@@ -26,9 +27,9 @@ public:
     Point_linked_list *get_points_list();
     void set_points_list(Point_linked_list *points_list);
 
-    void getDataFromInput();
+    void getDataFromInput(bool);
     void showData();
-
+    void showPoint();
     friend ofstream &operator<<(ofstream &out, Student &Student);
     friend ifstream &operator>>(ifstream &in, Student &Student);
 
@@ -42,7 +43,7 @@ Student::Student(string id, string first_name, string last_name, string sex)
     this->first_name = first_name;
     this->last_name = last_name;
     this->sex = sex;
-    this->points_list = nullptr;
+    this->point_list = nullptr;
 }
 
 Student::Student(Student *Student)
@@ -92,12 +93,12 @@ void Student::set_sex(string sex)
 
 Point_linked_list *Student::get_points_list()
 {
-    return points_list;
+    return point_list;
 }
 
-void Student::set_points_list(Point_linked_list *points_list)
+void Student::set_points_list(Point_linked_list *point_list)
 {
-    this->points_list = points_list;
+    this->point_list = point_list;
 }
 
 ofstream &operator<<(ofstream &out, Student &Student)
@@ -123,7 +124,7 @@ ifstream &operator>>(ifstream &in, Student &Student)
     return in;
 }
 
-void Student::getDataFromInput()
+void Student::getDataFromInput(bool isPoint = false)
 {
     cin.ignore();
     cout << "\nEnter your ID number: ";
@@ -136,6 +137,11 @@ void Student::getDataFromInput()
     getline(cin, this->sex);
     cout << "Enter your number phone: ";
     getline(cin, this->number_phone);
+    
+    if (!isPoint)
+    {
+        this->point_list->add_data();
+    }
 }
 
 void Student::showData()
@@ -149,10 +155,10 @@ void Student::showData()
 
 Student::Student()
 {
-    this->points_list = nullptr;
+    this->point_list = nullptr;
 }
 
 Student::~Student()
 {
-    delete points_list;
+    delete point_list;
 }

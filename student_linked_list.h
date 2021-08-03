@@ -1,4 +1,5 @@
 #pragma once
+#include "Point_linked_list.h"
 #include "Student_node.h"
 #include <iomanip>
 
@@ -22,10 +23,11 @@ public:
     void set_points_linked_list(Point_linked_list *point_linked_list, int pos);
     int is_contain_id(string id);
     int is_contain_id_except(string id, string except);
-
     void ssort();
     void swapp(Student &A, Student &B);
     void show_data();
+    void add_point(string student_id, Point point);
+    void show_point(Point_linked_list *point_list);
 
     Student_node *get_head() const;
     Student_node *get_node_at(int index);
@@ -46,9 +48,33 @@ void Student_linked_list::show_data()
     {
         temp->data.showData();
         cout << endl;
+        // temp->data.showPoint();
     }
     cout << "\t" << "+-----------+---------------+-------------------+-------+-------------+" << endl;
 }
+
+void Student_linked_list::add_point(string student_id, Point point)
+{
+
+    for (auto i = head; i != nullptr; i = i->next)
+    {
+        if (i->data.point_list == nullptr)
+            i->data.point_list = new Point_linked_list();
+        else if (i->data.get_id() == student_id)
+        {
+            i->data.point_list->push_back(point);
+            return;
+        }
+    }
+}
+
+// void Student_linked_list::show_point(Point_linked_list *point_list)
+// {
+//     for (auto i = head; i != nullptr; i = i->next)
+//     {
+//        i->data.point_list->show_data();
+//     }
+// }
 
 void Student_linked_list::replace_student_by_id(string id)
 {
@@ -265,7 +291,7 @@ void Student_linked_list::remove_by_id(string id)
 
     if (temp == nullptr)
     {
-        cout << "not found id";
+        cout << "Not found id";
     }
     else
     {

@@ -15,10 +15,11 @@ public:
     Point(Point *point);
     string get_subject_id() const;
     void set_subject_id(string subject_id);
-    int get_num_of_test() const;
-    void set_num_of_test(int time);
+    int get_time() const;
+    void set_time(int time);
     float get_point() const;
     void set_point(float point);
+    void addData();
     void showData();
     bool operator==(Point &other) const;
     friend ofstream &operator<<(ofstream &out, Point &other);
@@ -29,7 +30,16 @@ public:
     ~Point();
 };
 
-
+void Point::addData()
+{
+    cin.ignore();
+    cout << "\nEnter ID subject: ";
+    getline(cin, subject_id);
+    cout << "Enter time of the test: ";
+    cin >> time;
+    cout << "Enter point of subject: ";
+    cin >> point;
+}
 
 void Point::showData()
 {
@@ -50,12 +60,12 @@ Point::Point(Point *point)
     *this = *point;
 }
 
-int Point::get_num_of_test() const
+int Point::get_time() const
 {
     return time;
 }
 
-void Point::set_num_of_test(int time)
+void Point::set_time(int time)
 {
     this->time = time;
 }
@@ -96,6 +106,7 @@ Point::~Point()
 ofstream &operator<<(ofstream &out, Point &other)
 {
     out << other.subject_id << ",";
+    out << other.time << ",";
     out << other.point << "\n";
     return out;
 }
@@ -103,6 +114,7 @@ ofstream &operator<<(ofstream &out, Point &other)
 ifstream &operator>>(ifstream &in, Point &other)
 {
     getline(in, other.subject_id, ',');
+    in >> other.time;
     string point;
     getline(in, point);
     other.set_point(atof(point.c_str()));

@@ -88,9 +88,11 @@ void add_student()
 
         studentList->push_back(student);
         class_list->set_students_linked(classId, studentList);
-
-        Student_linked_list *studentList2 = class_list->get_students_linked(classId);
-        studentList2->ssort();
+        studentList->ssort();
+        DM.save_classes_list(class_list);
+        // DM.save_students_linked_list(studentList, student_list_file_path);
+        // Student_linked_list *studentList2 = class_list->get_students_linked(classId);
+        // studentList2->ssort();
     }
     catch (string &e)
     {
