@@ -128,7 +128,6 @@ void remove_student()
         cout << "error: " << e << "\n";
     }
     SetColor(Color::WHITE);
-    cout << "\nSuccessful!" << endl;
     getch();
 }
 
@@ -172,6 +171,7 @@ void show_student()
     cout << "Enter class id: ";
     cin.ignore();
     getline(cin, classId);
+
     try
     {
         Student_linked_list *studentList = class_list->get_students_linked(classId);

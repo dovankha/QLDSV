@@ -69,7 +69,7 @@ void add_class()
     {
         if (class_list->contain_id(clas.get_id()) != -1)
         {
-            throw string("id existed!!");
+            throw string("\nId existed!!");
         }
         class_list->push_back(clas);
         DM.save_classes_list(class_list);
@@ -83,35 +83,6 @@ void add_class()
         cout << "error: " << e << "\n";
     }
     SetColor(Color::WHITE);
-    getch();
-}
-
-void modify_class()
-{
-    string classID;
-    cout << "\nEnter class ID to modify: ";
-    cin.ignore();
-    getline(cin, classID);
-
-    try
-    {
-        if (class_list->contain_id(classID) == -1)
-        {
-            throw string("Class id doesn't exist!!");
-        }
-        clas.getInfoFromInput(true); // true khong cho phep sua id
-        class_list->replace_class_by_ID(classID, clas);
-        DM.save_classes_list(class_list);
-        SetColor(Color::GREEN);
-        cout << "\nSuccessful!" << endl;
-        SetColor(Color::WHITE);
-    }
-    catch (string &e)
-    {
-        SetColor(Color::RED);
-        cout << "error: " << e << "\n";
-        SetColor(Color::WHITE);
-    }
     getch();
 }
 
@@ -130,6 +101,35 @@ void remove_class()
             throw string("Class id doesn't exist!!");
         }
         class_list->delete_by_id(classID);
+        DM.save_classes_list(class_list);
+        SetColor(Color::GREEN);
+        cout << "\nSuccessful!" << endl;
+        SetColor(Color::WHITE);
+    }
+    catch (string &e)
+    {
+        SetColor(Color::RED);
+        cout << "error: " << e << "\n";
+        SetColor(Color::WHITE);
+    }
+    getch();
+}
+
+void modify_class()
+{
+    string classID;
+    cout << "\nEnter class ID to modify: ";
+    cin.ignore();
+    getline(cin, classID);
+
+    try
+    {
+        if (class_list->contain_id(classID) == -1)
+        {
+            throw string("Class id doesn't exist!!");
+        }
+        clas.getInfoFromInput(true); // true khong cho phep sua id
+        class_list->replace_class_by_ID(classID, clas);
         DM.save_classes_list(class_list);
         SetColor(Color::GREEN);
         cout << "\nSuccessful!" << endl;

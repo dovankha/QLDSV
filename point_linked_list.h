@@ -277,6 +277,7 @@ Point_linked_list::Point_linked_list()
 {
     head = nullptr;
 }
+
 Point_linked_list::~Point_linked_list()
 {
     Point_node *temp = head;

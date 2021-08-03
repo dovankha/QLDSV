@@ -32,7 +32,6 @@ void menu()
             cin.clear();
             cin.ignore(256, '\n');
         }
-
         else if (choice < 0 || choice > 4)
         {
             SetColor(Color::RED);
@@ -61,8 +60,3 @@ void menu()
         }
     }
 }
-
-// nhap lop id
-// nhap lan thi
-// nhap ma sinh vien
-// tim co sinh vien : nhap diem cho no

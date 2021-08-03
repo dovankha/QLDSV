@@ -139,8 +139,8 @@ void Subject_tree::show_subject_data(Subject_node *node)
 {
     cout << "\t|" << left << setw(12) << node->data.get_subject_id();
     cout << "|" << left << setw(29) << node->data.get_subject_name();
-    cout << "|" << left << setw(9) << node->data.get_STCLT();
-    cout << "|" << left << setw(9) << node->data.get_STCTH() << "|\n";
+    cout << "|    " << left << setw(5) << node->data.get_STCLT();
+    cout << "|    " << left << setw(5) << node->data.get_STCTH() << "|\n";
 }
 
 void Subject_tree::show_subject_tree(Subject_node *node)

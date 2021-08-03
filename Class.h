@@ -88,15 +88,47 @@ void Class::set_student_list(Student_linked_list *student_list)
 
 void Class::getInfoFromInput(bool isModify = false)
 {
-    if(!isModify){
+    if (!isModify)
+    {
         cin.ignore();
         cout << "\nEnter class ID: ";
+        getline(cin, this->id);
+        while (!((this->id >= "A" && this->id <= "Z") || (this->id >= "0" && this->id <= "9") || (this->id >= "a" && this->id <= "z")))
+        {
+            cout << "\n[Error]: Only Number or Alphabet!!" << endl;
+            cin.clear();
+            cin.ignore(256, '\n');
+            cout << "\nEnter class ID: ";
+            getline(cin, this->id);
+        }
     }
-    getline(cin, this->id);
     cout << "Enter class name: ";
     getline(cin, this->name);
-    cout << "Enter school year begin: ";
-    cin >> this->year;
+    while (!((this->name >= "A" && this->name <= "Z") || (this->name >= "0" && this->name <= "9") || (this->name >= "a" && this->name <= "z")))
+    {
+        cout << "\n[Error]: Only Number or Alphabet!!" << endl;
+        cin.clear();
+        cin.ignore(256, '\n');
+        cout << "Enter class name: ";
+        getline(cin, this->name);
+    }
+    while (1)
+    {
+        cout << "Enter school year begin: ";
+        cin >> this->year;
+        if (cin.fail())
+        {
+            cout << "\n[Error]: Only numbers!!" << endl;
+            getch();
+            cin.clear();
+            cin.ignore(256, '\n');
+        }
+        else
+        {
+            break;
+        }
+    }
+    cin.ignore(256, '\n');
 }
 
 void Class::showData()
@@ -121,7 +153,7 @@ ifstream &operator>>(ifstream &in, Class &clas)
     in >> clas.year;
 
     string temp;
-    getline(in,temp);
+    getline(in, temp);
     return in;
 }
 
