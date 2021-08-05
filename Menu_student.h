@@ -83,21 +83,19 @@ void add_student()
 
         if (studentList->is_contain_id(student.get_id()) != -1)
         {
-            throw string("id existed!!");
+            throw string("Id existed!!");
         }
 
         studentList->push_back(student);
         class_list->set_students_linked(classId, studentList);
-        studentList->ssort();
         DM.save_classes_list(class_list);
-        // DM.save_students_linked_list(studentList, student_list_file_path);
-        // Student_linked_list *studentList2 = class_list->get_students_linked(classId);
-        // studentList2->ssort();
     }
     catch (string &e)
     {
+        SetColor(Color::RED);
         cout << "error: " << e << "\n";
     }
+    SetColor(Color::WHITE);
     getch();
 }
 
@@ -109,20 +107,16 @@ void remove_student()
     getline(cin, classId);
     string student_ID;
     cout << "\nEnter student ID to delete: ";
-    cin.ignore();
     getline(cin, student_ID);
+
+    cout << "Class id: " << classId << endl;
+    cout << "Student id: " << student_ID;
 
     try
     {
         Student_linked_list *studentList = class_list->get_students_linked(classId);
-        if (studentList == nullptr)
-        {
-            cout << "\nStudent list is empty!\n";
-            studentList = new Student_linked_list();
-        }
         studentList->remove_by_id(student_ID);
         class_list->set_students_linked(classId, studentList);
-        Student_linked_list *studentList2 = class_list->get_students_linked(classId);
     }
     catch (string &e)
     {
@@ -182,8 +176,8 @@ void show_student()
             cout << "\nStudent list is empty!\n";
             studentList = new Student_linked_list();
         }
-        studentList->show_data();
         studentList->ssort();
+        studentList->show_data();
     }
     catch (string &e)
     {

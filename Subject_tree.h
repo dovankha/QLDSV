@@ -9,13 +9,11 @@ private:
 
     Subject_node *insert_r(Subject_node *, Subject data);
     Subject_node *search(Subject_node *, Subject data);
-    Subject_node *deleteNode(Subject_node *, string subject_id);
-    Subject_node *minValueNode(Subject_node *);
+    Subject_node *delete_recursive(Subject_node *, string subject_id);
+    Subject_node *find_min(Subject_node *);
     void free_memory(Subject_node *node);
     void show_subject_data(Subject_node *node);
     void show_subject_tree(Subject_node *);
-    
-    
 
 public:
     void insert(Subject data);
@@ -46,38 +44,44 @@ void Subject_tree::showTree()
 // bị fail
 void Subject_tree::replace_subject_by_id(string id, Subject subject)
 {
-    int position;
-    for (int i = 0; i < size; i++)
+    Subject_node *node = search(root,subject);
+    if (node != nullptr)
     {
-        if (root->data.get_subject_id() == id)
-        {
-            break;
-        }
+        node->data.getDataFromInput(true);
     }
 }
 
 int Subject_tree::contain_id(string id)
 {
-    for (int i = 0; i < size; i++)
-    {
-        if (root->data.get_subject_id() == id)
-        {
-            return i;
-        }
-    }
-    return -1;
+    Subject c;
+    c.set_subject_id(id);
+   Subject_node *node = search(root,c);
+   if(node == nullptr){
+       return -1;
+   }
+   return 1;
 }
 
 void Subject_tree::insert(Subject data)
 {
     this->root = insert_r(root, data);
-    size++;
 }
 
 void Subject_tree::remove(string subject_id)
 {
-    this->root = deleteNode(root, subject_id);
-    size--;
+    cout << "delete: " << subject_id << "\n";
+    cout << "lenght: " << subject_id.length() << endl;
+    if (get_size() == 0)
+    {
+        return;
+    }
+
+    int current_size = size;
+    this->root = delete_recursive(root, subject_id);
+    if (current_size == size)
+    {
+        throw string("not found subject_id\n");
+    }
 }
 
 Subject_node *Subject_tree::get_root() const
@@ -99,9 +103,10 @@ Subject_node *Subject_tree::insert_r(Subject_node *node, Subject data)
 {
     if (!node)
     {
+        size++;
         return new Subject_node(data);
     }
-    if (data.get_subject_name() > node->data.get_subject_name())
+    if (data.get_subject_id().compare(node->data.get_subject_id()) > 0)
     {
         node->right = insert_r(node->right, data);
     }
@@ -116,11 +121,11 @@ Subject_node *Subject_tree::search(Subject_node *node, Subject data)
 {
     if (node != NULL)
     {
-        if (data.get_subject_id() == node->data.get_subject_id())
+        if (data.get_subject_id().compare(node->data.get_subject_id()) == 0)
         {
             return node;
         }
-        if (data.get_subject_id() < node->data.get_subject_id())
+        if (data.get_subject_id().compare(node->data.get_subject_id()) < 0)
         {
             return search(node->left, data);
         }
@@ -152,44 +157,78 @@ void Subject_tree::show_subject_tree(Subject_node *node)
     show_subject_tree(node->right);
 }
 
-Subject_node *Subject_tree::minValueNode(Subject_node *node)
+Subject_node *Subject_tree::find_min(Subject_node *node)
 {
-    Subject_node *current = node;
-
-    while (current && current->left != NULL)
-        current = current->left;
-
-    return current;
+    auto temp = node;
+    while (temp->left != nullptr)
+    {
+        temp = temp->left;
+    }
+    return temp;
 }
+// id
+// tat ca  bat id
+// sapxep : duyet cay ,
 
-Subject_node *Subject_tree::deleteNode(Subject_node *node, string subject_id)
+// push du lieu vao 1 cai mang, sap xep ca mang đó, in mảng đó ra
+
+// vector<Subject> sorteSubject;
+/// chay ham duyt cay
+// sorSubjetc : tim gg sort vector c++
+// in vector ra
+
+// hamduyetCay(vector<Subject> &sorteSbject){
+
+//     sorSubject.push_back(Subject);
+
+// }
+
+Subject_node *Subject_tree::delete_recursive(Subject_node *node, string subject_id)
 {
-    if (node == nullptr)
-        return node;
-    if (subject_id < node->data.get_subject_id())
-        node->left = deleteNode(node->left, subject_id);
-    else if (subject_id < node->data.get_subject_id())
-        node->right = deleteNode(node->right, subject_id);
+    if (!node)
+    {
+        return nullptr;
+    }
+    else if (subject_id.compare(node->data.get_subject_id()) < 0)
+    {
+        node->left = delete_recursive(node->left, subject_id);
+    }
+
+    else if (subject_id.compare(node->data.get_subject_id()) > 0)
+    {
+        node->right = delete_recursive(node->right, subject_id);
+    }
     else
     {
-        if (node->left == NULL and node->right == NULL)
-            return NULL;
-        else if (node->left == NULL)
+        if (!node->left && !node->right) // leaf node
         {
-            Subject_node *temp = node->right;
-            free(node);
-            return temp;
+            delete node;
+            node = nullptr;
+            size--;
         }
-        else if (node->right == NULL)
+        else if (!node->left) // left null , right oke
         {
-            Subject_node *temp = node->left;
-            free(node);
-            return temp;
+            auto temp = node;
+            node = node->right;
+            delete temp;
+            size--;
         }
-        Subject_node *temp = Subject_tree::minValueNode(node->right);
-        node->data = temp->data;
-        node->right = deleteNode(node->right, temp->data.get_subject_id());
+        else if (!node->right) // right null, left ok
+        {
+            auto temp = node;
+            node = node->left;
+            delete temp;
+            size--;
+        }
+        else //
+        {
+            auto temp = find_min(node->right);
+
+            node->data = temp->data;
+            node->right = delete_recursive(node->right, temp->data.get_subject_id());
+        }
     }
+
     return node;
 }
 

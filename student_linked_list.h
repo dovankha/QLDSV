@@ -24,7 +24,7 @@ public:
     int is_contain_id(string id);
     int is_contain_id_except(string id, string except);
     void ssort();
-    void swapp(Student &A, Student &B);
+    void swapp(Student *A, Student *B);
     void show_data();
     void add_point(string student_id, Point point);
     void show_point(Point_linked_list *point_list);
@@ -58,23 +58,22 @@ void Student_linked_list::add_point(string student_id, Point point)
 
     for (auto i = head; i != nullptr; i = i->next)
     {
-        if (i->data.point_list == nullptr)
-            i->data.point_list = new Point_linked_list();
-        else if (i->data.get_id() == student_id)
-        {
+
+        if(i->data.get_id() == student_id){
+            if(i->data.point_list == nullptr){
+                i->data.point_list = new Point_linked_list();
+            }
+
+            // check loi
+
+            // insert
             i->data.point_list->push_back(point);
             return;
         }
     }
+    throw string("Not found student\n");
 }
 
-// void Student_linked_list::show_point(Point_linked_list *point_list)
-// {
-//     for (auto i = head; i != nullptr; i = i->next)
-//     {
-//        i->data.point_list->show_data();
-//     }
-// }
 
 void Student_linked_list::replace_student_by_id(string id)
 {
@@ -87,39 +86,22 @@ void Student_linked_list::replace_student_by_id(string id)
     }
 }
 
-void Student_linked_list::swapp(Student &A, Student &B)
+void Student_linked_list::swapp(Student *A, Student *B)
 {
-    Student C = A;
-    A = B;
-    B = C;
+    Student C = *A;
+    *A = *B;
+    *B = C;
 }
 
 void Student_linked_list::ssort()
 {
-    // auto min = head;
-    // for (auto i = head; i != nullptr && i->next != nullptr; i = i->next)
-    // {
-    //     min = i;
-    //     for (auto j = i->next; j != nullptr; j = j->next)
-    //     {
-    //         if (j->data.get_id() < min->data.get_id())
-    //         {
-    //             min = j;
-    //         }
-    //     }
-    //     if (min != i)
-    //     {
-    //         swapp(i->data, min->data);
-    //     }
-    // }
-
     for (auto i = head; i != nullptr && i->next != nullptr; i = i->next)
     {
         for (auto j = i->next; j != nullptr; j = j->next)
         {
             if (j->data.get_first_name() < i->data.get_first_name())
             {
-                swapp(i->data, j->data);
+                swapp(&(i->data), &(j->data));
             }
         }
     }

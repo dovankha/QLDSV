@@ -18,8 +18,6 @@ public:
     void remove_by_id(string id);
     void remove_by_subject_id(string id);
     void replace_id(string id);
-    void add_data();
-    void show_data();
 
     Point_node *get_head();
     float get_point(string subject_id);
@@ -28,23 +26,6 @@ public:
     ~Point_linked_list();
 };
 
-void Point_linked_list::add_data()
-{
-    for (Point_node *temp = head; temp != nullptr; temp = temp->next)
-    {
-        temp->data.addData();
-        cout << endl;
-    }
-}
-
-// void Point_linked_list::show_data()
-// {
-//     for (Point_node *temp = head; temp != nullptr; temp = temp->next)
-//     {
-//         temp->data.showData();
-//         cout << endl;
-//     }
-// }
 
 bool Point_linked_list::empty()
 {

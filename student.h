@@ -124,11 +124,14 @@ ifstream &operator>>(ifstream &in, Student &Student)
     return in;
 }
 
-void Student::getDataFromInput(bool isPoint = false)
+void Student::getDataFromInput(bool isModify = false)
 {
     cin.ignore();
-    cout << "\nEnter your ID number: ";
-    getline(cin, this->id);
+    if(!isModify){
+        cout << "\nEnter your ID number: ";
+        getline(cin, this->id);
+
+    }
     cout << "Enter your first name: ";
     getline(cin, this->first_name);
     cout << "Enter your last name: ";
@@ -137,11 +140,6 @@ void Student::getDataFromInput(bool isPoint = false)
     getline(cin, this->sex);
     cout << "Enter your number phone: ";
     getline(cin, this->number_phone);
-    
-    if (!isPoint)
-    {
-        this->point_list->add_data();
-    }
 }
 
 void Student::showData()

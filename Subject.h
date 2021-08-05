@@ -27,12 +27,8 @@ public:
     int get_STCTH() const;
     void set_STCTH(int STCTH);
 
-    void getDataFromInput();
+    void getDataFromInput(bool);
     void showData();
-
-    // int get_id() const;
-	// void set_id(int id);
-
     friend ifstream &operator>>(ifstream &in, Subject &other);
     friend ofstream &operator<<(ofstream &out, Subject &other);
 
@@ -40,12 +36,14 @@ public:
     ~Subject();
 };
 
-
-void Subject::getDataFromInput()
+void Subject::getDataFromInput(bool isModify = false)
 {
     cin.ignore();
-    cout << "\nEnter ID of subject: ";
-    getline(cin, this->subject_id);
+    if (!isModify)
+    {
+        cout << "\nEnter ID of subject: ";
+        getline(cin, this->subject_id);
+    }
     cout << "Enter the name of subject: ";
     getline(cin, this->subject_name);
     cout << "Enter number of STCLT: ";

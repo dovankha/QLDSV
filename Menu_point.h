@@ -1,13 +1,6 @@
 #pragma once
 #include "declare_menu.h"
 
-
-// nhap lop id
-// nhap lan thi
-// nhap ma sinh vien
-// tim co sinh vien : nhap diem cho no
-
-
 void add_point();
 void show_point_list();
 void show_average_point_list();
@@ -78,8 +71,9 @@ void add_point()
     getline(cin, class_id);
     string student_id;
     cout << "\nEnter student ID: ";
-    cin.ignore();
     getline(cin, student_id);
+
+    cout << "student_id : " << student_id << endl;
 
     try 
     {
@@ -93,8 +87,10 @@ void add_point()
         SetColor(Color::GREEN);
         cout << "\nSuccessful!" << endl;
         SetColor(Color::WHITE);
-    }
 
+        DM.save_classes_list(class_list);
+        // luu class
+    }
     catch (string &e)
     {
         SetColor(Color::RED);
@@ -106,7 +102,55 @@ void add_point()
 
 void show_point_list()
 {
-    point.showData();
-    // point_list->show_data();
+    try
+    {
+        string subject_id;
+        cout << "\nEnter subject id: ";
+        cin.ignore();
+        getline(cin, subject_id);
+        string class_id;
+        cout << "\nEnter class id: ";
+        getline(cin, class_id);
+        int time;
+        cout << "\nEnter time of the test: ";
+        cin >> time;
+
+        cout << "student list class :" << class_id << "\n"; 
+        // lay dnh sinh vien cua lop hoc ra
+        Student_linked_list *student_list = class_list->get_students_linked(class_id);
+
+        if(student_list == nullptr){
+            throw string("student list empty\n");
+        }
+     
+        // duyet danh sach sv
+        // duyet danh sach diem cua tung sinh vien
+        for(Student_node *studentNode = student_list->get_head();studentNode != nullptr;studentNode = studentNode->next){
+            if( studentNode->data.point_list == nullptr){
+                continue;
+            }
+
+            for(Point_node* pointNode = studentNode->data.point_list->get_head();pointNode != nullptr;pointNode = pointNode->next){
+                if(pointNode->data.get_subject_id() == subject_id && pointNode->data.get_time() ==  time){
+                    cout << studentNode->data.get_first_name() << " :  " << pointNode->data.get_point() << "\n";
+                }
+            }
+        }
+
+
+
+        // diuet danh sach sv
+        // tinh dim trung binh
+        // in ra
+
+
+        // duyt danh sach lop
+        // duyet sinh vien cua tung lop
+        // duyet diem cua tung sinh vien
+      
+    }catch(string &e){
+        cout << e << "\n";
+    }
+    
     getch();
 }

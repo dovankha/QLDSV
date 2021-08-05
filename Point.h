@@ -95,14 +95,6 @@ bool Point::operator==(Point &other) const
     return (subject_id == other.subject_id) && (point == other.point);
 }
 
-Point::Point()
-{
-}
-
-Point::~Point()
-{
-}
-
 ofstream &operator<<(ofstream &out, Point &other)
 {
     out << other.subject_id << ",";
@@ -119,4 +111,12 @@ ifstream &operator>>(ifstream &in, Point &other)
     getline(in, point);
     other.set_point(atof(point.c_str()));
     return in;
+}
+
+Point::Point()
+{
+}
+
+Point::~Point()
+{
 }

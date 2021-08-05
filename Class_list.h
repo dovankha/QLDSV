@@ -237,6 +237,7 @@ Student_linked_list *Classes_list::get_students_linked(string classID)
             return data[i]->get_student_list();
     }
     throw std::string("\nStudent list not found!!");
+    
 }
 
 void Classes_list::replace_subject_name(string name, int index)

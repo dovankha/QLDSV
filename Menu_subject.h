@@ -57,7 +57,6 @@ void menu_subject()
         {
             show_subject();
         }
-
         else
         {
             break;
@@ -107,14 +106,8 @@ void remove_subject()
         }
         else
         {
-            // Subject_node *node = new Subject_node();
-            // for (int i = 0; i < subject_tree->get_size(); i++)
-            // {
-            //     if (subject_id == node->data.get_subject_id())
-            //         subject_tree->remove(node->data.get_subject_id());
-            // }
             subject_tree->remove(subject_id);
-            // chua tim subject_id
+            DM.save_subject_tree(subject_tree);
             cout << "\nSuccessful!!";
         }
     }
@@ -124,7 +117,7 @@ void remove_subject()
         cout << "error: " << e << "\n";
     }
     SetColor(Color::WHITE);
-    DM.save_subject_tree(subject_tree);
+    
     getch();
 }
 
@@ -134,22 +127,28 @@ void modify_subject()
     cout << "\nEnter subject ID to modify: ";
     cin.ignore();
     getline(cin, subject_id);
+
+    cout << "subject id: " << subject_id << endl;
+
     try
     {
+      
+
         if (subject_tree->get_size() == 0)
         {
             throw string("\nSubject list is empty!!!");
         }
         Subject subject;
-        subject.getDataFromInput();
-        subject_tree->replace_subject_by_id(subject_id, subject);
+        subject.set_subject_id(subject_id);
 
         if (subject_tree->contain_id(subject.get_subject_id()) == -1)
         {
             throw string("Subject ID doesn't exist!!");
-        }
+        }   
 
-        subject_tree->insert(subject);
+        subject_tree->replace_subject_by_id(subject_id,subject);
+        DM.save_subject_tree(subject_tree);
+       
     }
     catch (string &e)
     {
