@@ -124,16 +124,12 @@ void remove_subject()
 void modify_subject()
 {
     string subject_id;
-    cout << "\nEnter subject ID to modify: ";
+    cout << "\nEnter subject ID: ";
     cin.ignore();
     getline(cin, subject_id);
 
-    cout << "subject id: " << subject_id << endl;
-
     try
     {
-      
-
         if (subject_tree->get_size() == 0)
         {
             throw string("\nSubject list is empty!!!");
@@ -152,7 +148,7 @@ void modify_subject()
     }
     catch (string &e)
     {
-        cout << "error: " << e << "\n";
+        cout << "\n[Error]: " << e << "\n";
     }
     getch();
 }

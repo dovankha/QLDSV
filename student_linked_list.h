@@ -40,17 +40,20 @@ public:
 void Student_linked_list::show_data()
 {
     cout << "\n\t\t\t======= STUDENT LIST BY CLASS ID =======\n\n";
-    cout << "\t" << "+-----------+---------------+-------------------+-------+-------------+" << endl;
-    cout << "\t" << left << setw(12) << "|    ID" << left << setw(16) << "|   First Name" 
+    cout << "\t"
+         << "+-----------+---------------+-------------------+-------+-------------+" << endl;
+    cout << "\t" << left << setw(12) << "|    ID" << left << setw(16) << "|   First Name"
          << left << setw(20) << "|     Last Name" << left << setw(8) << "| Sex" << left << setw(12) << "| NumberPhone |\n";
-    cout << "\t" << "+-----------+---------------+-------------------+-------+-------------+" << endl;
+    cout << "\t"
+         << "+-----------+---------------+-------------------+-------+-------------+" << endl;
     for (Student_node *temp = head; temp != nullptr; temp = temp->next)
     {
         temp->data.showData();
         cout << endl;
         // temp->data.showPoint();
     }
-    cout << "\t" << "+-----------+---------------+-------------------+-------+-------------+" << endl;
+    cout << "\t"
+         << "+-----------+---------------+-------------------+-------+-------------+" << endl;
 }
 
 void Student_linked_list::add_point(string student_id, Point point)
@@ -59,21 +62,19 @@ void Student_linked_list::add_point(string student_id, Point point)
     for (auto i = head; i != nullptr; i = i->next)
     {
 
-        if(i->data.get_id() == student_id){
-            if(i->data.point_list == nullptr){
+        if (i->data.get_id() == student_id)
+        {
+            if (i->data.point_list == nullptr)
+            {
                 i->data.point_list = new Point_linked_list();
             }
 
-            // check loi
-
-            // insert
             i->data.point_list->push_back(point);
             return;
         }
     }
     throw string("Not found student\n");
 }
-
 
 void Student_linked_list::replace_student_by_id(string id)
 {

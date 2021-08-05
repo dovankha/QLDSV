@@ -33,7 +33,7 @@ public:
 void Point::addData()
 {
     cin.ignore();
-    cout << "\nEnter ID subject: ";
+    cout << "Enter ID subject: ";
     getline(cin, subject_id);
     cout << "Enter time of the test: ";
     cin >> time;
@@ -44,8 +44,8 @@ void Point::addData()
 void Point::showData()
 {
     cout << "\nID subject: " << this->subject_id;
-    cout << "\nNumber of test:" << this->time;
-    cout << "\nPoint: " << this->point;
+    cout << "Number of test:" << this->time;
+    cout << "Point: " << this->point;
 }
 
 Point::Point(string subject_id,int time, float point)

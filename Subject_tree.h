@@ -41,7 +41,6 @@ void Subject_tree::showTree()
          << "+------------+-----------------------------+---------+---------+" << endl;
 }
 
-// bị fail
 void Subject_tree::replace_subject_by_id(string id, Subject subject)
 {
     Subject_node *node = search(root,subject);
@@ -69,8 +68,6 @@ void Subject_tree::insert(Subject data)
 
 void Subject_tree::remove(string subject_id)
 {
-    cout << "delete: " << subject_id << "\n";
-    cout << "lenght: " << subject_id.length() << endl;
     if (get_size() == 0)
     {
         return;
@@ -80,7 +77,7 @@ void Subject_tree::remove(string subject_id)
     this->root = delete_recursive(root, subject_id);
     if (current_size == size)
     {
-        throw string("not found subject_id\n");
+        throw string("Not found subject id!!\n");
     }
 }
 

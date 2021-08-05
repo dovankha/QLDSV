@@ -93,7 +93,7 @@ void add_student()
     catch (string &e)
     {
         SetColor(Color::RED);
-        cout << "error: " << e << "\n";
+        cout << "\n[Error]: " << e << "\n";
     }
     SetColor(Color::WHITE);
     getch();
@@ -108,20 +108,18 @@ void remove_student()
     string student_ID;
     cout << "\nEnter student ID to delete: ";
     getline(cin, student_ID);
-
-    cout << "Class id: " << classId << endl;
-    cout << "Student id: " << student_ID;
-
+    
     try
     {
         Student_linked_list *studentList = class_list->get_students_linked(classId);
         studentList->remove_by_id(student_ID);
         class_list->set_students_linked(classId, studentList);
+        DM.save_classes_list(class_list);
     }
     catch (string &e)
     {
         SetColor(Color::RED);
-        cout << "error: " << e << "\n";
+        cout << "\n[Error]: " << e << "\n";
     }
     SetColor(Color::WHITE);
     getch();
@@ -147,14 +145,13 @@ void modify_student()
             studentList = new Student_linked_list();
         }
         studentList->replace_student_by_id(student_ID);
-        cout << "a";
         class_list->set_students_linked(classId, studentList);
-        // Student_linked_list *studentList2 = class_list->get_students_linked(classId);
+        DM.save_classes_list(class_list);
     }
     catch (string &e)
     {
         SetColor(Color::RED);
-        cout << "error: " << e << "\n";
+        cout << "\n[Error]: " << e << "\n";
     }
     SetColor(Color::WHITE);
     getch();
@@ -162,7 +159,6 @@ void modify_student()
 
 void show_student()
 {
-    // bị bug - chỗ đọc file (có id lop nhung ko doc duoc sinh vien).
     string classId;
     cout << "Enter class id: ";
     cin.ignore();
@@ -181,7 +177,7 @@ void show_student()
     }
     catch (string &e)
     {
-        std::cout << e << "\nID class don't exist.\n";
+        cout << "\n[Error]: " << e << "\n";
     }
     getch();
 }
