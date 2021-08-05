@@ -59,25 +59,25 @@ Subject Database_Manager::read_subject(ifstream &file)
 void Database_Manager::save_subject_tree(Subject_tree *subject_tree)
 {
     ofstream file(subject_list_file_path);
-    stack<Subject_node *> stack;
+    stack<Subject_node *> my_stack;
     auto root = subject_tree->get_root();
     file << subject_tree->get_size() << '\n';
     while (true)
     {
         while (root)
         {
-            stack.push(root);
+            my_stack.push(root);
             root = root->left;
         }
-        if (stack.empty())
+        if (my_stack.empty())
         {
             break;
         }
         else
         {
-            root = stack.top();
+            root = my_stack.top();
             save_subject(root->data, file);
-            stack.pop();
+            my_stack.pop();
             root = root->right;
         }
     }
