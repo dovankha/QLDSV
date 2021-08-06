@@ -7,9 +7,7 @@ class Student_node
 public:
     Student data;
     Student_node *next;
-
     Student_node(Student student);
-
     Student_node();
     ~Student_node();
 };

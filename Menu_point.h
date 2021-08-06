@@ -82,16 +82,13 @@ void add_point()
         {
             throw string("Student id doesn't exist!!");
         }
-
         point.addData();
         studentList->add_point(student_id, point);
+        
+        DM.save_classes_list(class_list);
 
         SetColor(Color::GREEN);
         cout << "\nSuccessful!" << endl;
-        SetColor(Color::WHITE);
-
-        // DM.save_classes_list(class_list);
-        // DM.save_points_linked_list(point_list, point_list_file_path);
     }
     catch (string &e)
     {
@@ -150,7 +147,6 @@ void show_point_list()
     {
         SetColor(Color::RED);
         cout << "\n[Error]: " << e << "\n";
-        SetColor(Color::WHITE);
         cin.ignore();
     }
 
@@ -159,6 +155,9 @@ void show_point_list()
 
 void show_average_point_list()
 {
+    float sum_point = 0;
+    float averange_point = 0;
+    int count = 0;
     string class_id;
     cout << "\nEnter class id: ";
     cin.ignore();
@@ -177,15 +176,13 @@ void show_average_point_list()
         {
             continue;
         }
-        float sum_point = 0;
-        float averange_point = 0;
-        int count = 0;
-        for (Point_node *pointNode = studentNode->data.point_list->get_head(); pointNode != nullptr; pointNode = pointNode->next)
-        {
-            sum_point += pointNode->data.get_point();
-            count++;
-        }
-        averange_point = sum_point / count;
+        
+        // for (Point_node *pointNode = studentNode->data.point_list->get_head(); pointNode != nullptr; pointNode = pointNode->next)
+        // {
+        //     sum_point += pointNode->data.get_point();
+        //     count++;
+        // }
+        // averange_point = sum_point / count;
 
         for (Point_node *pointNode = studentNode->data.point_list->get_head(); pointNode != nullptr; pointNode = pointNode->next)
         {
@@ -241,7 +238,8 @@ void show_final_point_list()
                 cout << "\t| " << left << setw(10) << studentNode->data.get_id()
                      << "| " << left << setw(12) << studentNode->data.get_first_name()
                      << "| " << left << setw(22) << studentNode->data.get_last_name()
-                     << "| " << left << setw(9) << ""
+                    //  << "| " << left << setw(9) << pointNode->data.get_point()
+                    // dung vong for de hien thi cac ma mon hoc ra
                      << "|\n";
                 cout << "\t+----------+------------+----------------------+---------+" << endl;
             }

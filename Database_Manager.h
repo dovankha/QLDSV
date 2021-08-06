@@ -177,8 +177,11 @@ void Database_Manager::save_students_linked_list(Student_linked_list *students_l
     {
         save_student(temp->data, file);
         string path = point_list_file_path + temp->data.get_id() + ".csv";
+        cout << "path: " << path << "\n";
         if (temp->data.get_points_list() != nullptr)
         {
+            cout << "save point\n";
+            getch();
             save_points_linked_list(temp->data.get_points_list(), path);
         }
     }
@@ -235,7 +238,6 @@ Class Database_Manager::read_class(ifstream &file)
 void Database_Manager::save_classes_list(Classes_list *class_list)
 {
     ofstream file(class_list_file_path);
-
     file << class_list->get_size() << '\n';
 
     for (int i = 0; i < class_list->get_size(); i++)

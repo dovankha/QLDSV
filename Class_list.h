@@ -47,17 +47,16 @@ public:
 
 void Classes_list::replace_class_by_ID(string id, Class clas)
 {
-    int position = 0;
-    for (int i = 0; i < size; i++)
+    int i = 0;
+    for (i; i < size; i++)
     {
         if (data[i]->get_id() == id)
         {
            break;
         }
     }
-
-    data[position]->set_name(clas.get_name());
-    data[position]->set_year(clas.get_year());
+    data[i]->set_name(clas.get_name());
+    data[i]->set_year(clas.get_year());
 }
 
 void Classes_list::delete_by_id(string classId)

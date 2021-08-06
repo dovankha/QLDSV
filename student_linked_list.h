@@ -17,12 +17,10 @@ public:
     void pop_back();
     void pop_front();
     void insert_at(int position, Student data);
-    void remove_at(int position);
     void remove_by_id(string id);
     void replace_student_by_id(string id);
     void set_points_linked_list(Point_linked_list *point_linked_list, int pos);
     int is_contain_id(string id);
-    int is_contain_id_except(string id, string except);
     void ssort();
     void swapp(Student *A, Student *B);
     void show_data();
@@ -30,7 +28,6 @@ public:
     void show_point(Point_linked_list *point_list);
 
     Student_node *get_head() const;
-    Student_node *get_node_at(int index);
     void set_head(Student_node *head);
 
     Student_linked_list();
@@ -50,7 +47,6 @@ void Student_linked_list::show_data()
     {
         temp->data.showData();
         cout << endl;
-        // temp->data.showPoint();
     }
     cout << "\t"
          << "+-----------+---------------+-------------------+-------+-------------+" << endl;
@@ -70,9 +66,8 @@ void Student_linked_list::add_point(string student_id, Point point)
             i->data.point_list->push_back(point);
             return;
         }
-        else
-            throw string("Not found student\n");
     }
+    throw string("Not found student\n");
 }
 
 void Student_linked_list::replace_student_by_id(string id)
@@ -81,7 +76,8 @@ void Student_linked_list::replace_student_by_id(string id)
     {
         if (i->data.get_id() == id)
         {
-            i->data.getDataFromInput();
+            i->data.getDataFromInput(true);
+            break;
         }
     }
 }
@@ -211,43 +207,6 @@ void Student_linked_list::insert_at(int position, Student data)
     size++;
 }
 
-void Student_linked_list::remove_at(int position)
-{
-    if (empty())
-    {
-        cout << " point list empty";
-        return;
-    }
-    if (position > size - 1 || position < 0)
-    {
-        return;
-    }
-    if (position == 0)
-    {
-        pop_front();
-        return;
-    }
-    if (position == size - 1)
-    {
-        pop_back();
-        return;
-    }
-    int count = 0;
-    Student_node *previous = head;
-    Student_node *delete_node = head->next;
-
-    while (delete_node != nullptr && (count < position - 1))
-    {
-        previous = previous->next;
-        delete_node = delete_node->next;
-        count++;
-    }
-
-    previous->next = delete_node->next;
-    delete delete_node;
-    size--;
-}
-
 void Student_linked_list::remove_by_id(string id)
 {
     if (empty())
@@ -315,43 +274,9 @@ int Student_linked_list::is_contain_id(string id)
     return -1;
 }
 
-int Student_linked_list::is_contain_id_except(string id, string except)
-{
-    int count = 0;
-    for (auto temp = head; temp != nullptr; temp = temp->next)
-    {
-        if (temp->data.get_id() == id && temp->data.get_id() != except)
-        {
-            return count;
-        }
-        count++;
-    }
-    return -1;
-}
-
 Student_node *Student_linked_list::get_head() const
 {
     return head;
-}
-
-Student_node *Student_linked_list::get_node_at(int index)
-{
-    if (index < 0 || index > size - 1)
-        return nullptr;
-    if (!head)
-        return nullptr;
-    int count = 0;
-    auto temp = head;
-    while (temp != nullptr && count != index)
-    {
-        count++;
-        temp = temp->next;
-    }
-    if (temp != nullptr)
-    {
-        return temp;
-    }
-    return nullptr;
 }
 
 void Student_linked_list::set_head(Student_node *head)

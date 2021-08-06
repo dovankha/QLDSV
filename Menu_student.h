@@ -83,12 +83,14 @@ void add_student()
 
         if (studentList->is_contain_id(student.get_id()) != -1)
         {
-            throw string("Id existed!!");
+            throw string("Student id existed!!");
         }
 
         studentList->push_back(student);
         class_list->set_students_linked(classId, studentList);
         DM.save_classes_list(class_list);
+        SetColor(Color::GREEN);
+        cout << "\nSuccessful!" << endl;
     }
     catch (string &e)
     {
@@ -106,15 +108,22 @@ void remove_student()
     cin.ignore();
     getline(cin, classId);
     string student_ID;
-    cout << "\nEnter student ID to delete: ";
+    cout << "Enter student ID to delete: ";
     getline(cin, student_ID);
     
     try
     {
         Student_linked_list *studentList = class_list->get_students_linked(classId);
+        if (studentList->is_contain_id(student_ID) == -1)
+        {
+            throw string("Student id doesn't exist!!");
+        }
         studentList->remove_by_id(student_ID);
+
         class_list->set_students_linked(classId, studentList);
         DM.save_classes_list(class_list);
+        SetColor(Color::GREEN);
+        cout << "\nSuccessful!" << endl;
     }
     catch (string &e)
     {
@@ -133,7 +142,6 @@ void modify_student()
     getline(cin, classId);
     string student_ID;
     cout << "\nEnter student ID to modify: ";
-    cin.ignore();
     getline(cin, student_ID);
 
     try
@@ -144,9 +152,15 @@ void modify_student()
             cout << "\nStudent list is empty!\n";
             studentList = new Student_linked_list();
         }
+        if (studentList->is_contain_id(student_ID) == -1)
+        {
+            throw string("Student id doesn't exist!!");
+        }
         studentList->replace_student_by_id(student_ID);
         class_list->set_students_linked(classId, studentList);
         DM.save_classes_list(class_list);
+        SetColor(Color::GREEN);
+        cout << "\nSuccessful!" << endl;
     }
     catch (string &e)
     {

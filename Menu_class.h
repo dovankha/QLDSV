@@ -32,7 +32,6 @@ void menu_class()
             cin.clear();
             cin.ignore(256, '\n');
         }
-
         else if (choice < 0 || choice > 4)
         {
             SetColor(Color::RED);
@@ -69,20 +68,18 @@ void add_class()
     {
         if (class_list->contain_id(clas.get_id()) != -1)
         {
-            throw string("\nId existed!!");
+            throw string("Id existed!!");
         }
         class_list->push_back(clas);
         DM.save_classes_list(class_list);
         SetColor(Color::GREEN);
         cout << "\nSuccessful!" << endl;
-        SetColor(Color::WHITE);
     }
     catch (string &e)
     {
         SetColor(Color::RED);
-        cout << "error: " << e << "\n";
+        cout << "\n[Error]: " << e << "\n";
     }
-    SetColor(Color::WHITE);
     getch();
 }
 
@@ -103,13 +100,11 @@ void remove_class()
         DM.save_classes_list(class_list);
         SetColor(Color::GREEN);
         cout << "\nSuccessful!" << endl;
-        SetColor(Color::WHITE);
     }
     catch (string &e)
     {
         SetColor(Color::RED);
-        cout << "error: " << e << "\n";
-        SetColor(Color::WHITE);
+        cout << "\n[Error]: " << e << "\n";
     }
     getch();
 }
@@ -132,13 +127,11 @@ void modify_class()
         DM.save_classes_list(class_list);
         SetColor(Color::GREEN);
         cout << "\nSuccessful!" << endl;
-        SetColor(Color::WHITE);
     }
     catch (string &e)
     {
         SetColor(Color::RED);
-        cout << "error: " << e << "\n";
-        SetColor(Color::WHITE);
+        cout << "\n[Error]: " << e << "\n";
     }
     getch();
 }

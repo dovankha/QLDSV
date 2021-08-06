@@ -127,9 +127,11 @@ ifstream &operator>>(ifstream &in, Point &other)
 {
     getline(in, other.subject_id, ',');
     in >> other.time;
-    string point;
-    getline(in, point);
-    other.set_point(atof(point.c_str()));
+    // string point;
+    // getline(in, point);
+    // other.set_point(atof(point.c_str()));
+    in.seekg(1);
+    in >> other.point;
     return in;
 }
 

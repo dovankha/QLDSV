@@ -23,7 +23,7 @@ void menu_subject()
         SetColor(Color::WHITE);
         cout << "\n\nMake a choice: ";
         cin >> choice;
-        
+
         if (cin.fail())
         {
             SetColor(Color::RED);
@@ -52,7 +52,6 @@ void menu_subject()
         {
             modify_subject();
         }
-
         else if (choice == 4)
         {
             show_subject();
@@ -66,22 +65,16 @@ void menu_subject()
 
 void add_subject()
 {
-    try
-    {
         if (subject_tree->get_size() == 0)
         {
+            SetColor(Color::RED);
             cout << "\nSubject list is empty!\n";
         }
         Subject subject;
         subject.getDataFromInput();
         subject_tree->insert(subject);
-    }
-    catch (string &e)
-    {
-        cout << "error: " << e << "\n";
-    }
-    DM.save_subject_tree(subject_tree);
-    getch();
+        DM.save_subject_tree(subject_tree);
+        getch();
 }
 
 void remove_subject()
@@ -91,27 +84,27 @@ void remove_subject()
     cout << "\nEnter subject ID to delete: ";
     cin.ignore();
     getline(cin, subject_id);
-
     try
     {
         if (subject_tree->get_size() == 0)
         {
-            cout << "\nSubject list is empty!\n";
+            throw string ("Subject list is empty!\n");
         }
-        else
+        if ((subject_tree->contain_id(subject_id)) == -1)
         {
-            subject_tree->remove(subject_id);
-            DM.save_subject_tree(subject_tree);
-            cout << "\nSuccessful!!";
+            throw string("Subject doesn't exist!!");
         }
+
+        subject_tree->remove(subject_id);
+        DM.save_subject_tree(subject_tree);
+        SetColor(Color::GREEN);
+        cout << "\nSuccessful!!";
     }
     catch (string &e)
     {
         SetColor(Color::RED);
-        cout << "error: " << e << "\n";
+        cout << "\n[Error]: " << e << "\n";
     }
-    SetColor(Color::WHITE);
-    
     getch();
 }
 
@@ -126,7 +119,7 @@ void modify_subject()
     {
         if (subject_tree->get_size() == 0)
         {
-            throw string("\nSubject list is empty!!!");
+            throw string("Subject list is empty!!!");
         }
         Subject subject;
         subject.set_subject_id(subject_id);
@@ -134,12 +127,13 @@ void modify_subject()
         if (subject_tree->contain_id(subject.get_subject_id()) == -1)
         {
             throw string("Subject ID doesn't exist!!");
-        }   
-        subject_tree->replace_subject_by_id(subject_id,subject);
+        }
+        subject_tree->replace_subject_by_id(subject_id, subject);
         DM.save_subject_tree(subject_tree);
     }
     catch (string &e)
     {
+        SetColor(Color::RED);
         cout << "\n[Error]: " << e << "\n";
     }
     getch();

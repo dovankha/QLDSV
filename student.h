@@ -127,10 +127,10 @@ ifstream &operator>>(ifstream &in, Student &Student)
 void Student::getDataFromInput(bool isModify = false)
 {
     cin.ignore();
-    if(!isModify){
-        cout << "\nEnter your ID number: ";
+    if(!isModify)
+    {
+        cout << "Enter your ID number: ";
         getline(cin, this->id);
-
     }
     cout << "Enter your first name: ";
     getline(cin, this->first_name);
