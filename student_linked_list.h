@@ -58,7 +58,6 @@ void Student_linked_list::show_data()
 
 void Student_linked_list::add_point(string student_id, Point point)
 {
-
     for (auto i = head; i != nullptr; i = i->next)
     {
 
@@ -68,12 +67,12 @@ void Student_linked_list::add_point(string student_id, Point point)
             {
                 i->data.point_list = new Point_linked_list();
             }
-
             i->data.point_list->push_back(point);
             return;
         }
+        else
+            throw string("Not found student\n");
     }
-    throw string("Not found student\n");
 }
 
 void Student_linked_list::replace_student_by_id(string id)

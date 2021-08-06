@@ -49,9 +49,11 @@ void menu_point()
         }
         else if (choice == 3)
         {
+            show_average_point_list();
         }
         else if (choice == 4)
         {
+            show_final_point_list();
         }
         else
         {
@@ -62,23 +64,28 @@ void menu_point()
 
 void add_point()
 {
-    string class_id;
-    cout << "\nEnter class ID: ";
-    cin.ignore();
-    getline(cin, class_id);
-    string student_id;
-    cout << "Enter student ID: ";
-    getline(cin, student_id);
-
     try
     {
+        string class_id;
+        cout << "\nEnter class ID: ";
+        cin.ignore();
+        getline(cin, class_id);
         if (class_list->contain_id(class_id) == -1)
         {
             throw string("Class id doesn't exist!!");
         }
         Student_linked_list *studentList = class_list->get_students_linked(class_id);
+        string student_id;
+        cout << "Enter student ID: ";
+        getline(cin, student_id);
+        if ((studentList->is_contain_id(student_id)) == -1)
+        {
+            throw string("Student id doesn't exist!!");
+        }
+
         point.addData();
         studentList->add_point(student_id, point);
+
         SetColor(Color::GREEN);
         cout << "\nSuccessful!" << endl;
         SetColor(Color::WHITE);
@@ -89,7 +96,7 @@ void add_point()
     catch (string &e)
     {
         SetColor(Color::RED);
-        cout << "error: " << e << "\n";
+        cout << "\n[Error]: " << e << "\n";
         SetColor(Color::WHITE);
     }
     getch();
@@ -110,50 +117,139 @@ void show_point_list()
         cout << "Enter time of the test: ";
         cin >> time;
 
-        cout << "class : " << class_id << "subject: " << subject_id << "time: " << time << endl;
-
         Student_linked_list *student_list = class_list->get_students_linked(class_id);
 
         if (student_list == nullptr)
         {
             throw string("Student list empty\n");
         }
-
-        // duyet danh sach sv
-        // duyet danh sach diem cua tung sinh vien
         for (Student_node *studentNode = student_list->get_head(); studentNode != nullptr; studentNode = studentNode->next)
         {
             if (studentNode->data.point_list == nullptr)
             {
                 continue;
             }
-
+            cout << "\n\t\t   ====== POINT LIST BY SUBJECT ======" << endl;
+            cout << "\t+----------+------------+----------------------+---------+" << endl;
+            cout << "\t|    ID    | Frist Name |      Last Name       |  Point  |" << endl;
+            cout << "\t+----------+------------+----------------------+---------+" << endl;
             for (Point_node *pointNode = studentNode->data.point_list->get_head(); pointNode != nullptr; pointNode = pointNode->next)
             {
                 if (pointNode->data.get_subject_id() == subject_id && pointNode->data.get_time() == time)
                 {
-                    // show diem
-                    cout << studentNode->data.get_first_name() << " : " << pointNode->data.get_point() << "\n";
-                }
-                else
-                {
-                    cout << "\nNot found!!";
+                    cout << "\t|" << left << setw(10) << studentNode->data.get_id()
+                         << "|" << left << setw(12) << studentNode->data.get_first_name()
+                         << "|" << left << setw(22) << studentNode->data.get_last_name()
+                         << "|" << left << setw(9) << pointNode->data.get_point() << "|\n";
                 }
             }
+            cout << "\t+----------+------------+----------------------+---------+" << endl;
         }
-
-        // duyet danh sach sv
-        // tinh dim trung binh
-        // in ra
-
-        // dueyt danh sach lop
-        // duyet sinh vien cua tung lop
-        // duyet diem cua tung sinh vien
     }
     catch (string &e)
     {
+        SetColor(Color::RED);
         cout << "\n[Error]: " << e << "\n";
+        SetColor(Color::WHITE);
+        cin.ignore();
     }
 
+    getch();
+}
+
+void show_average_point_list()
+{
+    string class_id;
+    cout << "\nEnter class id: ";
+    cin.ignore();
+    getline(cin, class_id);
+
+    Student_linked_list *student_list = class_list->get_students_linked(class_id);
+
+    if (student_list == nullptr)
+    {
+        throw string("Student list empty\n");
+    }
+
+    for (Student_node *studentNode = student_list->get_head(); studentNode != nullptr; studentNode = studentNode->next)
+    {
+        if (studentNode->data.point_list == nullptr)
+        {
+            continue;
+        }
+        float sum_point = 0;
+        float averange_point = 0;
+        int count = 0;
+        for (Point_node *pointNode = studentNode->data.point_list->get_head(); pointNode != nullptr; pointNode = pointNode->next)
+        {
+            sum_point += pointNode->data.get_point();
+            count++;
+        }
+        averange_point = sum_point / count;
+
+        for (Point_node *pointNode = studentNode->data.point_list->get_head(); pointNode != nullptr; pointNode = pointNode->next)
+        {
+            if ((class_list->contain_id(class_id)) != -1)
+            {
+                cout << "\n\t\t ====== POINT AVERAGE LIST  ======" << endl;
+                cout << "\t+----------+------------+----------------------+---------+" << endl;
+                cout << "\t|    ID    | Frist Name |      Last Name       |  Point  |" << endl;
+                cout << "\t+----------+------------+----------------------+---------+" << endl;
+                cout << "\t| " << left << setw(10) << studentNode->data.get_id()
+                     << "| " << left << setw(12) << studentNode->data.get_first_name()
+                     << "| " << left << setw(22) << studentNode->data.get_last_name()
+                     << "| " << left << setw(9) << averange_point << "|\n";
+                cout << "\t+----------+------------+----------------------+---------+" << endl;
+            }
+            else
+            {
+                cout << "\nNot found!!";
+            }
+        }
+    }
+    getch();
+}
+
+void show_final_point_list()
+{
+    string class_id;
+    cout << "\nEnter class id: ";
+    cin.ignore();
+    getline(cin, class_id);
+
+    Student_linked_list *student_list = class_list->get_students_linked(class_id);
+
+    if (student_list == nullptr)
+    {
+        throw string("Student list empty\n");
+    }
+
+    for (Student_node *studentNode = student_list->get_head(); studentNode != nullptr; studentNode = studentNode->next)
+    {
+        if (studentNode->data.point_list == nullptr)
+        {
+            continue;
+        }
+        for (Point_node *pointNode = studentNode->data.point_list->get_head(); pointNode != nullptr; pointNode = pointNode->next)
+        {
+            if ((class_list->contain_id(class_id)) != -1)
+            {
+                cout << "\n\t\t ====== POINT LIST BY CLASS ======" << endl;
+                cout << "\t+----------+------------+----------------------+---------+" << endl;
+                cout << "\t|    ID    | Frist Name |      Last Name       |  Point  |" << endl;
+                cout << "\t+----------+------------+----------------------+---------+" << endl;
+                cout << "\t| " << left << setw(10) << studentNode->data.get_id()
+                     << "| " << left << setw(12) << studentNode->data.get_first_name()
+                     << "| " << left << setw(22) << studentNode->data.get_last_name()
+                     << "| " << left << setw(9) << ""
+                     << "|\n";
+                cout << "\t+----------+------------+----------------------+---------+" << endl;
+            }
+            else
+            {
+                cout << "\nNot found!!";
+            }
+        }
+    }
     getch();
 }

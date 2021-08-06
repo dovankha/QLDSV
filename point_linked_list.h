@@ -190,7 +190,7 @@ void Point_linked_list::remove_by_id(string id)
     }
     if (temp == nullptr)
     {
-        cout << " not fount id";
+        cout << "Not fount id";
     }
     else
     {

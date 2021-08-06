@@ -74,12 +74,6 @@ void add_subject()
         }
         Subject subject;
         subject.getDataFromInput();
-
-        // if ()
-        // {
-        //     throw string("id existed!!");
-        // }
-
         subject_tree->insert(subject);
     }
     catch (string &e)
@@ -141,10 +135,8 @@ void modify_subject()
         {
             throw string("Subject ID doesn't exist!!");
         }   
-
         subject_tree->replace_subject_by_id(subject_id,subject);
         DM.save_subject_tree(subject_tree);
-       
     }
     catch (string &e)
     {

@@ -88,7 +88,6 @@ void add_class()
 
 void remove_class()
 {
-    // bị bug - xóa lớp nhưng ngoài file student ko xóa
     string classID;
     cout << "\nEnter class ID to delete: ";
     cin.ignore();

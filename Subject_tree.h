@@ -43,7 +43,7 @@ void Subject_tree::showTree()
 
 void Subject_tree::replace_subject_by_id(string id, Subject subject)
 {
-    Subject_node *node = search(root,subject);
+    Subject_node *node = search(root, subject);
     if (node != nullptr)
     {
         node->data.getDataFromInput(true);
@@ -54,11 +54,12 @@ int Subject_tree::contain_id(string id)
 {
     Subject c;
     c.set_subject_id(id);
-   Subject_node *node = search(root,c);
-   if(node == nullptr){
-       return -1;
-   }
-   return 1;
+    Subject_node *node = search(root, c);
+    if (node == nullptr)
+    {
+        return -1;
+    }
+    return 1;
 }
 
 void Subject_tree::insert(Subject data)
@@ -217,7 +218,7 @@ Subject_node *Subject_tree::delete_recursive(Subject_node *node, string subject_
             delete temp;
             size--;
         }
-        else //
+        else
         {
             auto temp = find_min(node->right);
 
@@ -228,37 +229,6 @@ Subject_node *Subject_tree::delete_recursive(Subject_node *node, string subject_
 
     return node;
 }
-
-// Subject_node *Subject_tree::deleteNode(Subject_node *node, Subject data)
-// {
-//     if (node == NULL)
-//         return node;
-//     if (data.get_subject_id() < node->data.get_subject_id())
-//         node->left = deleteNode(node->left, data);
-//     else if (data.get_subject_id() > node->data.get_subject_id())
-//         node->right = deleteNode(node->right, data);
-//     else
-//     {
-//         if (node->left == NULL and node->right == NULL)
-//             return NULL;
-//         else if (node->left == NULL)
-//         {
-//             Subject_node *temp = node->right;
-//             free(node);
-//             return temp;
-//         }
-//         else if (node->right == NULL)
-//         {
-//             Subject_node *temp = node->left;
-//             free(node);
-//             return temp;
-//         }
-//         Subject_node *temp = Subject_tree::minValueNode(node->right);
-//         node->data = temp->data;
-//         node->right = deleteNode(node->right, temp->data);
-//     }
-//     return node;
-// }
 
 void Subject_tree::free_memory(Subject_node *node)
 {

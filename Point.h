@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include "Graphic.h"
 using namespace std;
 
 class Point
@@ -35,10 +36,29 @@ void Point::addData()
     cin.ignore();
     cout << "Enter ID subject: ";
     getline(cin, subject_id);
-    cout << "Enter time of the test: ";
+    cout << "Enter time: ";
     cin >> time;
-    cout << "Enter point of subject: ";
+    while (cin.fail() || time < 1)
+    {
+        SetColor(Color::RED);
+        cout << "\n[Error]: Time > 0, please!!\n" << endl;
+        SetColor(Color::WHITE);
+        cin.ignore(256, '\n');
+        cout << "Enter time: ";
+        cin >> time;
+    }
+    cout << "Enter point: ";
     cin >> point;
+    while (cin.fail() || point < 0 || point > 10)
+    {
+        SetColor(Color::RED);
+        cout << "\n[Error]: 0 <= Point <= 10, please!!\n" << endl;
+        SetColor(Color::WHITE);
+        cin.clear();
+        cin.ignore(256, '\n');
+        cout << "Enter point: ";
+        cin >> point;
+    }
 }
 
 void Point::showData()
