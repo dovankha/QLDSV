@@ -33,7 +33,7 @@ public:
     void replace_subject_name(string name, int index);
     void replace_subject_id(string id, int index);
     void replace_class_by_ID(string id, Class clas);
-
+    
     int get_size() const;
     void set_size(int size);
     int get_capacity() const;
