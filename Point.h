@@ -8,16 +8,16 @@ using namespace std;
 class Point
 {
     string subject_id;
-    int time; // lan thi 
+    string time; // lan thi 
     float point;
 
 public:
-    Point(string subject_id,int time, float point);
+    Point(string subject_id,string time, float point);
     Point(Point *point);
     string get_subject_id() const;
     void set_subject_id(string subject_id);
-    int get_time() const;
-    void set_time(int time);
+    string get_time() const;
+    void set_time(string time);
     float get_point() const;
     void set_point(float point);
     void addData();
@@ -37,15 +37,15 @@ void Point::addData()
     cout << "Enter ID subject: ";
     getline(cin, subject_id);
     cout << "Enter time: ";
-    cin >> time;
-    while (cin.fail() || time < 1)
+    getline(cin, time);
+    while (cin.fail() || time < "1")
     {
         SetColor(Color::RED);
         cout << "\n[Error]: Time > 0, please!!\n" << endl;
         SetColor(Color::WHITE);
         cin.ignore(256, '\n');
         cout << "Enter time: ";
-        cin >> time;
+        getline(cin, time);
     }
     cout << "Enter point: ";
     cin >> point;
@@ -68,7 +68,7 @@ void Point::showData()
     cout << "Point: " << this->point;
 }
 
-Point::Point(string subject_id,int time, float point)
+Point::Point(string subject_id,string time, float point)
 {
     this->subject_id = subject_id;
     this->time = time;
@@ -80,12 +80,12 @@ Point::Point(Point *point)
     *this = *point;
 }
 
-int Point::get_time() const
+string Point::get_time() const
 {
     return time;
 }
 
-void Point::set_time(int time)
+void Point::set_time(string time)
 {
     this->time = time;
 }
@@ -126,12 +126,11 @@ ofstream &operator<<(ofstream &out, Point &other)
 ifstream &operator>>(ifstream &in, Point &other)
 {
     getline(in, other.subject_id, ',');
-    in >> other.time;
+    getline(in, other.time, ',');
+    in >> other.point;
     // string point;
     // getline(in, point);
     // other.set_point(atof(point.c_str()));
-    in.seekg(1);
-    in >> other.point;
     return in;
 }
 

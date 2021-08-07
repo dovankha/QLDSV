@@ -236,7 +236,7 @@ void Point_linked_list::remove_by_subject_id(string id)
 
     if (temp == nullptr)
     {
-        cout << " not found id";
+        cout << "Not found id";
     }
     else
     {

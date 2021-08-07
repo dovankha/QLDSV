@@ -164,6 +164,7 @@ Subject_node *Subject_tree::find_min(Subject_node *node)
     }
     return temp;
 }
+
 // id
 // tat ca  bat id
 // sapxep : duyet cay ,

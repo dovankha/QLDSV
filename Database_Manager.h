@@ -177,11 +177,8 @@ void Database_Manager::save_students_linked_list(Student_linked_list *students_l
     {
         save_student(temp->data, file);
         string path = point_list_file_path + temp->data.get_id() + ".csv";
-        cout << "path: " << path << "\n";
         if (temp->data.get_points_list() != nullptr)
         {
-            cout << "save point\n";
-            getch();
             save_points_linked_list(temp->data.get_points_list(), path);
         }
     }
