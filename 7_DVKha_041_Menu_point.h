@@ -1,5 +1,6 @@
 #pragma once
-#include "declare_menu.h"
+#include "7_DVKha_041_Declare_menu.h"
+#include "7_DVKha_041_Subject_tree.h"
 
 void add_point();
 void show_point_list();
@@ -222,7 +223,6 @@ void show_average_point_list()
                          << "|" << left << setw(12) << studentNode->data.get_first_name()
                          << "|" << left << setw(22) << studentNode->data.get_last_name()
                          << "|" << left << setw(9) << averange_point << "|\n";
-                        //  << "|" << left << setw(9) << pointNode->data.get_point() << "|\n";
                 }
             }
         }

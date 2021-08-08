@@ -1,5 +1,5 @@
 #pragma once
-#include "Student.h"
+#include "7_DVKha_041_Student.h"
 
 class Student_node
 {

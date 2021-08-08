@@ -1,5 +1,5 @@
 #pragma once
-#include "declare_menu.h"
+#include "7_DVKha_041_Declare_menu.h"
 
 void add_class();
 void modify_class();

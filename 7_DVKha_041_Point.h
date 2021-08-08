@@ -2,7 +2,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include "Graphic.h"
+#include "7_DVKha_041_Graphic.h"
 using namespace std;
 
 class Point

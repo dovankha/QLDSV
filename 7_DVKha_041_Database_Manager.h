@@ -1,15 +1,15 @@
 #pragma once
 #include <stack>
 #include <fstream>
-#include "Point.h"
-#include "Point_linked_list.h"
-#include "Student.h"
-#include "Student_linked_list.h"
-#include "Class.h"
-#include "Class_list.h"
-#include "Subject.h"
-#include "Subject_tree.h"
-#include "Graphic.h"
+#include "7_DVKha_041_Point.h"
+#include "7_DVKha_041_Point_linked_list.h"
+#include "7_DVKha_041_Student.h"
+#include "7_DVKha_041_Student_linked_list.h"
+#include "7_DVKha_041_Class.h"
+#include "7_DVKha_041_Class_list.h"
+#include "7_DVKha_041_Subject.h"
+#include "7_DVKha_041_Subject_tree.h"
+#include "7_DVKha_041_Graphic.h"
 
 class Database_Manager
 {

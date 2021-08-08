@@ -1,4 +1,5 @@
-#include "declare_menu.h"
+#pragma once
+#include "7_DVKha_041_Declare_menu.h"
 
 void add_subject();
 void remove_subject();
@@ -142,5 +143,7 @@ void modify_subject()
 void show_subject()
 {
     subject_tree->showTree();
+    cout << endl;
+    subject_tree->showSubject();
     getch();
 }

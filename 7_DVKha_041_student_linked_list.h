@@ -1,6 +1,6 @@
 #pragma once
-#include "Point_linked_list.h"
-#include "Student_node.h"
+#include "7_DVKha_041_Point_linked_list.h"
+#include "7_DVKha_041_Student_node.h"
 #include <iomanip>
 
 class Student_linked_list

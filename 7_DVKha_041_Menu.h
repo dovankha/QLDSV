@@ -1,8 +1,8 @@
 #pragma one
-#include "Menu_class.h"
-#include "Menu_student.h"
-#include "Menu_subject.h"
-#include "Menu_point.h"
+#include "7_DVKha_041_Menu_class.h"
+#include "7_DVKha_041_Menu_student.h"
+#include "7_DVKha_041_Menu_subject.h"
+#include "7_DVKha_041_Menu_point.h"
 
 void menu()
 {

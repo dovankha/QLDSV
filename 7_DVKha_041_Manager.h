@@ -1,6 +1,6 @@
 #pragma once
-#include "Class_list.h"
-#include "Subject_tree.h"
+#include "7_DVKha_041_Class_list.h"
+#include "7_DVKha_041_Subject_tree.h"
 
 
 class Manager
