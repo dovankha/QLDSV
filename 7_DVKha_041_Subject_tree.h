@@ -15,15 +15,14 @@ private:
     void show_subject_data(Subject_node *node);
     void show_subject_tree(Subject_node *);
     void show_subject_id(Subject_node *node);
-    void showSub(Subject_node *node);
 
 public:
+    Subject_node* search_by_id(string id);
     void insert(Subject data);
     void remove(string subject_id);
     int contain_id(string id);
     void replace_subject_by_id(string id, Subject subject);
     void showTree();
-    void showSubject();
     int get_size();
     Subject_node *get_root() const;
     void set_root(Subject_node *root);
@@ -52,6 +51,18 @@ void Subject_tree::replace_subject_by_id(string id, Subject subject)
         node->data.getDataFromInput(true);
     }
 }
+
+Subject_node* Subject_tree::search_by_id(string id){
+    Subject c;
+    c.set_subject_id(id);
+    Subject_node *node = search(root, c);
+    if (node != nullptr)
+    {
+        return node;
+    }
+    throw string("not found subject: " + id);
+}
+
 
 int Subject_tree::contain_id(string id)
 {
@@ -140,26 +151,7 @@ Subject_node *Subject_tree::search(Subject_node *node, Subject data)
         return nullptr;
     }
 }
-// chay thu show ten mon hoc
 
-void Subject_tree::show_subject_id(Subject_node *node)
-{
-    cout << "|  " << left << setw(10) << node->data.get_subject_id();
-}
-
-void Subject_tree::showSub(Subject_node *node)
-{
-    if (!node)
-        return;
-    showSub(node->left);
-    show_subject_id(node);
-    showSub(node->right);
-}
-
-void Subject_tree::showSubject()
-{
-    showSub(root);
-}
 
 void Subject_tree::show_subject_data(Subject_node *node)
 {

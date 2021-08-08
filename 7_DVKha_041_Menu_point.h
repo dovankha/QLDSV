@@ -170,7 +170,6 @@ void show_point_list()
 
 void show_average_point_list()
 {
-    float sum_point = 0;
     float summ = 0;
     float averange_point = 0;
     int count = 0;
@@ -193,7 +192,8 @@ void show_average_point_list()
         }
         cout << "\n\t\t   ====== POINT AVERAGE LIST ======\n"
              << endl;
-        cout << "\t\tCLASS ID: " << class_id << "\tYEAR: " << "2019" << endl;
+        cout << "\t\tCLASS ID: " << class_id << "\tYEAR: "
+             << "2019" << endl;
         cout << "\t+----------+------------+----------------------+---------+" << endl;
         cout << "\t|    ID    | Frist Name |      Last Name       |  Point  |" << endl;
         cout << "\t+----------+------------+----------------------+---------+" << endl;
@@ -203,28 +203,18 @@ void show_average_point_list()
             {
                 continue;
             }
+
             for (Point_node *pointNode = studentNode->data.point_list->get_head(); pointNode != nullptr; pointNode = pointNode->next)
             {
-                for (Point_node *pointNode2 = pointNode->next; pointNode2 != nullptr; pointNode2 = pointNode2->next)
-                {
-                    if (pointNode->data.get_subject_id() == pointNode2->data.get_subject_id())
-                        sum_point = pointNode->data.get_point() + pointNode2->data.get_point();
-                    else
-                        sum_point = pointNode->data.get_point();
-                    summ += sum_point;
-                    count++;
-                }
+                Subject subject = subject_tree->search_by_id(pointNode->data.get_subject_id())->data;
+                summ += pointNode->data.get_point() * (subject.get_STCLT() + subject.get_STCTH());
+                count += (subject.get_STCLT() + subject.get_STCTH());
             }
-            averange_point = summ/count;
-            for (Point_node *pointNode = studentNode->data.point_list->get_head(); pointNode != nullptr; pointNode = pointNode->next)
-            {
-                {
-                    cout << "\t|" << left << setw(10) << studentNode->data.get_id()
-                         << "|" << left << setw(12) << studentNode->data.get_first_name()
-                         << "|" << left << setw(22) << studentNode->data.get_last_name()
-                         << "|" << left << setw(9) << averange_point << "|\n";
-                }
-            }
+            averange_point = summ / count;
+            cout << "\t|" << left << setw(10) << studentNode->data.get_id()
+                 << "|" << left << setw(12) << studentNode->data.get_first_name()
+                 << "|" << left << setw(22) << studentNode->data.get_last_name()
+                 << "|" << left << setw(9) << averange_point << "|\n";
         }
         cout << "\t+----------+------------+----------------------+---------+" << endl;
     }

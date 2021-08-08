@@ -143,7 +143,5 @@ void modify_subject()
 void show_subject()
 {
     subject_tree->showTree();
-    cout << endl;
-    subject_tree->showSubject();
     getch();
 }

@@ -8,11 +8,11 @@ using namespace std;
 class Point
 {
     string subject_id;
-    string time; // lan thi 
+    string time; // lan thi
     float point;
 
 public:
-    Point(string subject_id,string time, float point);
+    Point(string subject_id, string time, float point);
     Point(Point *point);
     string get_subject_id() const;
     void set_subject_id(string subject_id);
@@ -25,7 +25,6 @@ public:
     bool operator==(Point &other) const;
     friend ofstream &operator<<(ofstream &out, Point &other);
     friend ifstream &operator>>(ifstream &in, Point &other);
-    
 
     Point();
     ~Point();
@@ -41,7 +40,8 @@ void Point::addData()
     while (cin.fail() || time < "1")
     {
         SetColor(Color::RED);
-        cout << "\n[Error]: Time > 0, please!!\n" << endl;
+        cout << "\n[Error]: Time > 0, please!!\n"
+             << endl;
         SetColor(Color::WHITE);
         cin.ignore(256, '\n');
         cout << "Enter time: ";
@@ -52,7 +52,8 @@ void Point::addData()
     while (cin.fail() || point < 0 || point > 10)
     {
         SetColor(Color::RED);
-        cout << "\n[Error]: 0 <= Point <= 10, please!!\n" << endl;
+        cout << "\n[Error]: 0 <= Point <= 10, please!!\n"
+             << endl;
         SetColor(Color::WHITE);
         cin.clear();
         cin.ignore(256, '\n');
@@ -68,7 +69,7 @@ void Point::showData()
     cout << "Point: " << this->point;
 }
 
-Point::Point(string subject_id,string time, float point)
+Point::Point(string subject_id, string time, float point)
 {
     this->subject_id = subject_id;
     this->time = time;
@@ -128,6 +129,9 @@ ifstream &operator>>(ifstream &in, Point &other)
     getline(in, other.subject_id, ',');
     getline(in, other.time, ',');
     in >> other.point;
+    string line;
+    getline(in, line);
+
     return in;
 }
 
