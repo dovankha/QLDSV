@@ -158,5 +158,5 @@ Student::Student()
 
 Student::~Student()
 {
-    delete point_list;
+    // delete point_list;
 }
