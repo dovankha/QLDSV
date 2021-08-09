@@ -84,6 +84,10 @@ void add_point()
             throw string("Student id doesn't exist!!");
         }
         point.addData();
+        if (subject_tree->contain_id(point.get_subject_id()) == -1)
+        {
+            throw string ("Subject ID " + point.get_subject_id() + " doesn't exist!!");
+        }
         studentList->add_point(student_id, point);
         DM.save_classes_list(class_list);
 
@@ -179,6 +183,7 @@ void show_average_point_list()
         cout << "\nEnter class id: ";
         cin.ignore();
         getline(cin, class_id);
+
         if (class_list->contain_id(class_id) == -1)
         {
             throw string("Class id doesn't exist!!");
@@ -192,8 +197,7 @@ void show_average_point_list()
         }
         cout << "\n\t\t   ====== POINT AVERAGE LIST ======\n"
              << endl;
-        cout << "\t\tCLASS ID: " << class_id << "\tYEAR: "
-             << "2019" << endl;
+        cout << "\t\tCLASS ID: " << class_id << endl;
         cout << "\t+----------+------------+----------------------+---------+" << endl;
         cout << "\t|    ID    | Frist Name |      Last Name       |  Point  |" << endl;
         cout << "\t+----------+------------+----------------------+---------+" << endl;
@@ -229,41 +233,53 @@ void show_average_point_list()
 
 void show_final_point_list()
 {
-    string class_id;
-    cout << "\nEnter class id: ";
-    cin.ignore();
-    getline(cin, class_id);
-
-    Student_linked_list *student_list = class_list->get_students_linked(class_id);
-
-    if (student_list == nullptr)
+    try
     {
-        throw string("Student list empty\n");
-    }
+        string class_id;
+        cout << "\nEnter class id: ";
+        cin.ignore();
+        getline(cin, class_id);
 
-    for (Student_node *studentNode = student_list->get_head(); studentNode != nullptr; studentNode = studentNode->next)
-    {
-        if (studentNode->data.point_list == nullptr)
+        if (class_list->contain_id(class_id) == -1)
         {
-            continue;
+            throw string("Class id doesn't exist!!");
         }
-        for (Point_node *pointNode = studentNode->data.point_list->get_head(); pointNode != nullptr; pointNode = pointNode->next)
+
+        Student_linked_list *student_list = class_list->get_students_linked(class_id);
+
+        cout << "\n\t\t      ====== POINT LIST BY CLASS ======" << endl;
+        cout << "\t\t\t CLASS ID: " << class_id << endl;
+        cout << "\t+----------+------------+----------------------+-----------------+" << endl;
+        cout << "\t|    ID    | Frist Name |      Last Name       |SUB ID --> POINT |" << endl;
+        cout << "\t+----------+------------+----------------------+-----------------+" << endl;
+
+
+        for (Student_node *studentNode = student_list->get_head(); studentNode != nullptr; studentNode = studentNode->next)
         {
-            if ((class_list->contain_id(class_id)) != -1)
+            if (studentNode->data.point_list == nullptr)
             {
-                cout << "\n\t\t ====== POINT LIST BY CLASS ======" << endl;
-                cout << "\t+----------+------------+----------------------+---------+" << endl;
-                cout << "\t|    ID    | Frist Name |      Last Name       |  Point  |" << endl;
-                cout << "\t+----------+------------+----------------------+---------+" << endl;
-                cout << "\t| " << left << setw(10) << studentNode->data.get_id()
-                     << "| " << left << setw(12) << studentNode->data.get_first_name()
-                     << "| " << left << setw(22) << studentNode->data.get_last_name()
-                     //  << "| " << left << setw(9) << pointNode->data.get_point()
-                     // dung vong for de hien thi cac ma mon hoc ra
-                     << "|\n";
-                cout << "\t+----------+------------+----------------------+---------+" << endl;
+                continue;
             }
+
+            cout << "\t|" << left << setw(10) << studentNode->data.get_id()
+                 << "|" << left << setw(12) << studentNode->data.get_first_name()
+                 << "|" << left << setw(22) << studentNode->data.get_last_name();
+            
+            for (Point_node *pointNode = studentNode->data.point_list->get_head(); pointNode != nullptr; pointNode = pointNode->next)
+            {
+                Subject subject = subject_tree->search_by_id(pointNode->data.get_subject_id())->data;
+                cout << "|" << left << setw(10) << subject.get_subject_id()
+                    << "-->" << left << setw(4) << pointNode->data.get_point();
+            }
+            cout << "|\n";
         }
+        cout << "\t+----------+------------+----------------------+-----------------+" << endl;
+    }
+    catch (string &e)
+    {
+        SetColor(Color::RED);
+        cout << "\n[Error]: " << e << "\n";
+        cin.ignore();
     }
     getch();
 }
